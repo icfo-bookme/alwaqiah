@@ -2,34 +2,25 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { FaTimes } from 'react-icons/fa';
 import {
-    FaPhoneAlt,
-    FaInfoCircle,
-    FaWhatsapp,
-    FaTimes,
-    FaExclamationTriangle
-} from 'react-icons/fa';
+    FaKaaba,
+    FaMosque,
+    FaCalendarDays,
+    FaUserGroup
+} from 'react-icons/fa6';
 import { Roboto } from 'next/font/google';
-import PrimaryButton from '../ui/Button';
 import Link from 'next/link';
-import Modal from '../ui/Modal';
+import CTAButtons from '../ui/CTAButtons';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 
-export default function Packages({ packages, foodAndDescription }) {
+export default function Packages({ packages }) {
     const [selectedDescription, setSelectedDescription] = useState(null);
+    const [modalTitle, setModalTitle] = useState('Package Details');
+    const [activeTab, setActiveTab] = useState('umrah');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, []);
     useEffect(() => {
         if (isModalOpen) {
             // Fix background scroll and prevent "jump"
@@ -46,30 +37,17 @@ export default function Packages({ packages, foodAndDescription }) {
             document.body.style.paddingRight = '0px';
         };
     }, [isModalOpen]);
-    const openModal = (description) => {
+
+    const openModal = (description, title = 'Package Details') => {
         setSelectedDescription(description);
+        setModalTitle(title);
         setIsModalOpen(true);
-        document.body.style.overflow = 'hidden';
     };
 
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedDescription(null);
-        document.body.style.overflow = 'unset';
-    };
-
-    const handleCall = () => {
-        window.location.href = 'tel:+8801841999922';
-    };
-
-    const handleBook = () => {
-        alert('Redirecting to booking form...');
-    };
-
-    const handleWhatsApp = () => {
-        const message = "Hello, I'm interested in booking a package on MV Teknaf.";
-        const url = `https://wa.me/8801841999922?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        setModalTitle('Package Details');
     };
 
     const truncateText = (text, wordLimit = 30, charLimit = 200) => {
@@ -85,271 +63,181 @@ export default function Packages({ packages, foodAndDescription }) {
         return truncated + (words.length > wordLimit || text.length > charLimit ? "..." : "");
     };
 
-    const calculateDiscountPrice = (pkg, isRoundTrip = false) => {
-        const basePrice = isRoundTrip ? pkg.round_trip_price : pkg.price;
-
-        if (!basePrice) return null;
-
-        if (pkg.discount_percent && pkg.discount_percent > 0) {
-            return Math.round(basePrice * (1 - pkg.discount_percent / 100));
-        } else if (pkg.discount_amount && pkg.discount_amount > 0) {
-            return Math.round(basePrice - pkg.discount_amount);
-        }
-
-        return basePrice;
-    };
-
-    const imageBaseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-
-    if (error) {
-        return (
-            <div className="max-w-5xl mx-auto px-4 py-12">
-                <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
-                    <FaExclamationTriangle className="w-12 h-12 mx-auto text-red-500 mb-4" />
-                    <h3 className="text-xl font-semibold text-red-800 mb-2">Unable to Load Packages</h3>
-                    <p className="text-red-600 mb-4">{error}</p>
-                    <button
-                        onClick={() => window.location.reload()}
-                        className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition-colors"
-                    >
-                        Try Again
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
     return (
-        <div className='bg-[#FFFFFF] '>
+        <div className='bg-[#FFFFFF] pb-10'>
             <div className="max-w-5xl mx-auto px-4 ">
                 <div className={`  text-center mb-12`}>
                     <h1 className="text-2xl  text-center text-blue-950  pt-8 lg:text-3xl font-bold mb-1">
-                        MV Teknaf <span className="text-red-700">Packages</span>
+                        আল-ওয়াকিয়া হজ কাফেলা-র  হজ ও ওমরাহ <span className="text-red-700">প্যাকেজসমূহ </span>
                     </h1>
-                    <p className="text-gray-900 max-w-3xl mx-auto">
-                        Explore our premium cruise packages with exceptional amenities and competitive pricing
-                    </p>
-                    <button
-                        onClick={() => setShowModal(true)}
-                        className="bg-gradient-to-r from-[#313881] to-[#0678B4] text-white px-6 py-3 mt-3 rounded-lg"
-                    >
-                        Food & Travel Description
-                    </button>
-                    <div className='max-h-[80vh]'>
-                        <Modal
-                            isOpen={showModal}
-                            onClose={() => setShowModal(false)}
-                            title="MV Teknaf Food & Travel Description"
-                            foodAndDescription={foodAndDescription}
-                        />
+                    {/* Umrah / Hajj Tabs */}
+                    <div className="flex justify-center gap-3 mt-6 mb-4">
+                        <button
+                            onClick={() => setActiveTab('umrah')}
+                            className={`flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 ${activeTab === 'umrah'
+                                ? 'bg-gradient-to-r from-[#313881] to-[#0678B4] text-white shadow-lg scale-105'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }`}
+                        >
+                            <FaKaaba />
+                            ওমরাহ প্যাকেজ
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('hajj')}
+                            className={`flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 ${activeTab === 'hajj'
+                                ? 'bg-gradient-to-r from-[#313881] to-[#0678B4] text-white shadow-lg scale-105'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                }`}
+                        >
+                            <FaMosque />
+                            হজ প্যাকেজ
+                        </button>
                     </div>
 
                 </div>
                 <div className={`${roboto.className}`}>
-                    {isLoading ? (
-                        <div className="grid grid-cols-1 gap-8">
-                            {[1, 2, 3].map((item) => (
-                                <div key={item} className="bg-white rounded-xl shadow-md overflow-hidden border border-gray-200 animate-pulse">
-                                    <div className="flex flex-col md:flex-row">
-                                        <div className="md:w-2/5 h-64 md:h-auto bg-gray-300"></div>
-                                        <div className="md:w-3/5 p-6">
-                                            <div className="h-6 bg-gray-300 rounded w-3/4 mb-4"></div>
-                                            <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-                                            <div className="h-4 bg-gray-300 rounded w-5/6 mb-4"></div>
-                                            <div className="h-4 bg-gray-300 rounded w-full mb-2"></div>
-                                            <div className="h-4 bg-gray-300 rounded w-4/5 mb-6"></div>
-                                            <div className="flex justify-between">
-                                                <div className="h-8 bg-gray-300 rounded w-1/4"></div>
-                                                <div className="flex gap-3">
-                                                    <div className="h-10 bg-gray-300 rounded w-24"></div>
-                                                    <div className="h-10 bg-gray-300 rounded w-24"></div>
-                                                    <div className="h-10 bg-gray-300 rounded w-24"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : packages && packages.length > 0 ? (
-                        <div className="grid grid-cols-1 gap-8">
-                            {packages.map((pkg) => {
-                                const hasDiscount =
-                                    (pkg.discount_amount && pkg.discount_amount > 0) ||
-                                    (pkg.discount_percent && pkg.discount_percent > 0);
+                    {packages && packages.length > 0 ? (
+                        (() => {
+                            const filteredPackages = packages.filter(
+                                (pkg) => (pkg.package_type || '').toLowerCase() === activeTab
+                            );
 
-                                const discountText =
-                                    pkg.discount_percent && pkg.discount_percent > 0
-                                        ? `${Math.round(pkg.discount_percent)}% OFF`
-                                        : pkg.discount_amount && pkg.discount_amount > 0
-                                            ? `Save ৳${Math.round(pkg.discount_amount)}`
-                                            : null;
+                            return (
+                                <div className="grid grid-cols-1 gap-8">
+                                    {filteredPackages.map((pkg) => {
+                                        const price = pkg.price ? Math.round(parseFloat(pkg.price)) : null;
+                                        const features = Array.isArray(pkg.features) ? pkg.features : [];
 
-                                const singleTripPrice = calculateDiscountPrice(pkg, false);
-                                const roundTripPrice = calculateDiscountPrice(pkg, true);
-
-                                return (
-                                    <div style={{
-                                        boxShadow: `
-    inset 0 4px 8px rgba(67, 56, 202, 0.1),   /* top */
-    inset 0 -4px 8px rgba(67, 56, 202, 0.1),  /* bottom */
-    inset 4px 0 8px rgba(67, 56, 202, 0.1),   /* left */
-    inset -4px 0 8px rgba(67, 56, 202, 0.1)   /* right */
+                                        return (
+                                            <div style={{
+                                                boxShadow: `
+                                                    inset 0 4px 8px rgba(67, 56, 202, 0.1),   /* top */
+                                                    inset 0 -4px 8px rgba(67, 56, 202, 0.1),  /* bottom */
+                                                    inset 4px 0 8px rgba(67, 56, 202, 0.1),   /* left */
+                                                    inset -4px 0 8px rgba(67, 56, 202, 0.1)   /* right */
   `
-                                    }}
-                                        key={pkg.unit_id}
-                                        className="bg-white  rounded-xl shadow-md overflow-hidden border border-gray-200 transition-all hover:shadow-lg"
-                                    >
+                                            }}
+                                                key={pkg.id}
+                                                className="bg-white  rounded-xl shadow-md overflow-hidden border border-gray-200 transition-all hover:shadow-lg"
+                                            >
 
 
-                                        <div className="flex flex-col md:flex-row">
-                                            {/* Image Section */}
-                                            <div className="md:w-2/5 relative h-64 md:h-auto">
-                                                {hasDiscount && (
-                                                    <div className="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-10 shadow-md">
-                                                        {discountText}
-                                                    </div>
-                                                )}
-                                                <Image
-                                                    src={`${imageBaseUrl}/storage/${pkg.mainimg}`}
-                                                    alt={pkg.unit_name || "Package Image"}
-                                                    fill
-                                                    className="object-cover"
-                                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                                />
-                                            </div>
-
-                                            {/* Details Section */}
-                                            <div className="md:w-3/5 p-6 flex flex-col justify-between">
-                                                <div>
-                                                    <div className="flex justify-between items-start mb-2">
-                                                        <h5 className="text-2xl font-bold text-blue-950">{pkg.unit_name}</h5>
-                                                        <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
-                                                            {pkg.unit_category}
-                                                        </span>
+                                                <div className="flex flex-col md:flex-row">
+                                                    {/* Image Section */}
+                                                    <div className="md:w-2/5 relative h-64 md:h-auto">
+                                                        {pkg.is_featured && (
+                                                            <div className="absolute top-4 right-4 bg-gradient-to-r from-[#313881] to-[#0678B4] text-white px-3 py-1 rounded-full text-xs font-semibold z-10 shadow-md">
+                                                                Featured
+                                                            </div>
+                                                        )}
+                                                        <Image
+                                                            src={pkg.thumbnail_url}
+                                                            alt={pkg.title || "Package Image"}
+                                                            fill
+                                                            className="object-cover"
+                                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                                        />
                                                     </div>
 
-                                                    <div className="flex flex-wrap gap-3 mb-4 text-sm text-gray-900">
-                                                        <span><strong className="mr-1">Capacity:</strong> {pkg.person_allowed} persons</span>
-                                                        <span className="text-blue-950">•</span>
-                                                        <span><strong className="mr-1">Extra Bed:</strong> {pkg.additionalbed}</span>
-                                                        <span className="text-blue-950">•</span>
-                                                        <span><strong className="mr-1">Type:</strong> {pkg.unit_type}</span>
-                                                    </div>
+                                                    {/* Details Section */}
+                                                    <div className="md:w-3/5 p-6 flex flex-col justify-between">
+                                                        <div>
+                                                            <div className="flex justify-between items-start mb-2 gap-2">
+                                                                <h5 className="text-2xl font-bold text-blue-950">{pkg.title}</h5>
+                                                                <span className="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full capitalize whitespace-nowrap">
+                                                                    {pkg.package_type}
+                                                                </span>
+                                                            </div>
 
-                                                    {pkg.description && (
-                                                        <div className="mb-2">
-                                                            <p className="text-gray-900">
-                                                                <strong className="mr-1"> Details:</strong>  {truncateText(pkg.description)}
-                                                                <button
-                                                                    onClick={() => openModal(pkg.description)}
-                                                                    className="text-blue-800 hover:text-blue-600 font-bold ml-2 text-base"
-                                                                >
-                                                                    Read more
-                                                                </button>
-                                                            </p>
+                                                            <div className="flex flex-wrap gap-3 mb-4 text-sm text-gray-900">
+                                                                <span className="flex items-center">
+                                                                    <FaCalendarDays className="mr-1.5 text-[#0678B4]" />
+                                                                    <strong className="mr-1">Duration:</strong> {pkg.duration_days} days
+                                                                </span>
+                                                                <span className="text-blue-950">•</span>
+                                                                <span className="flex items-center">
+                                                                    <FaUserGroup className="mr-1.5 text-[#0678B4]" />
+                                                                    {pkg.price_label || "per person"}
+                                                                </span>
+                                                            </div>
+
+                                                            {/* Features List */}
+                                                            {features.length > 0 && (
+                                                                <div className="mb-4">
+                                                                    <p className="font-semibold text-gray-900 mb-2">প্যাকেজ সুবিধাসমূহ:</p>
+                                                                    <ul className="space-y-2">
+                                                                        {features
+                                                                            .slice()
+                                                                            .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
+                                                                            .map((feature) => {
+                                                                                return (
+                                                                                    <li
+                                                                                        key={feature.id}
+                                                                                        className="flex items-start text-sm text-gray-700"
+                                                                                    >
+                                                                                        <i
+                                                                                            className={`${feature.icon || 'fa-solid fa-circle-check'} mr-2 mt-1 flex-shrink-0 text-[#0678B4]`}
+                                                                                        />
+                                                                                        <span>{feature.title}</span>
+                                                                                    </li>
+                                                                                );
+                                                                            })}
+                                                                    </ul>
+                                                                </div>
+                                                            )}
+
+                                                            {(pkg.short_description || pkg.description) && (
+                                                                <div className="mb-2">
+                                                                    <p className="text-gray-900">
+                                                                        <strong className="mr-1"> Details:</strong>  {truncateText(pkg.short_description || pkg.description)}
+                                                                        <button
+                                                                            onClick={() => openModal(pkg.short_description || pkg.description, pkg.title)}
+                                                                            className="text-blue-800 hover:text-blue-600 font-bold ml-2 text-base"
+                                                                        >
+                                                                            See more
+                                                                        </button>
+                                                                    </p>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    )}
-                                                </div>
 
-                                                <hr className="my-4" />
+                                                        <hr className="my-4" />
 
-                                                {/* Pricing & Actions */}
-                                                <div className="flex flex-col sm:flex-row items-center justify-between">
-                                                    <div className="mb-4 sm:mb-0 flex gap-4 ">
-                                                        {/* Single Trip */}
-                                                        {singleTripPrice !== null && (
-                                                            <div className="bg-blue-50 p-4 rounded-lg space-y-2">
-                                                                {/* Duration Label */}
+                                                        {/* Pricing & Actions */}
+                                                        <div className="flex flex-col sm:flex-row items-center justify-between">
+                                                            <div className="mb-4 sm:mb-0 flex gap-4 ">
+                                                                {/* Price */}
+                                                                {price !== null && (
+                                                                    <div className="bg-blue-50 p-4 rounded-lg space-y-2">
+                                                                        {/* Price Label */}
+                                                                        <p className="text-sm text-red-600 font-medium">Price</p>
 
+                                                                        {/* Price Section */}
+                                                                        <div className="flex items-center">
+                                                                            <p className="text-xl font-bold text-blue-950">
+                                                                                {price} TK
+                                                                            </p>
+                                                                        </div>
+                                                                        <div className='flex items-center justify-center'>
+                                                                            {/* Price Note */}
+                                                                            <p className="text-xs text-gray-500">{pkg.price_label || "Per person"}</p>
+                                                                        </div>
 
-                                                                {/* Price Label */}
-                                                                <p className="text-sm text-red-600 font-medium">Price</p>
+                                                                    </div>
 
-                                                                {/* Price Section */}
-                                                                <div className="flex items-center">
-                                                                    {hasDiscount && (
-                                                                        <p className="text-sm text-gray-500 line-through mr-2">
-                                                                            {Math.round(pkg.price)} TK
-                                                                        </p>
-                                                                    )}
-                                                                    <p className="text-xl font-bold text-blue-950">
-                                                                        {Math.round(singleTripPrice)} TK
-                                                                    </p>
-                                                                </div>
-                                                                <div className='flex items-center justify-center'>
-                                                                    <p className="text-xs font-semibold text-blue-800 bg-blue-100 px-2 py-1 inline-block rounded">
-                                                                        {pkg.Validity}
-                                                                    </p>
-                                                                    {/* Price Note */}
-                                                                    <p className="text-xs text-gray-500">/ Per person</p>
-                                                                </div>
-
+                                                                )}
                                                             </div>
 
-                                                        )}
-
-                                                        {/* Round Trip */}
-                                                        {roundTripPrice > 0 && (
-                                                            <div className="bg-green-50 p-3 rounded-lg">
-                                                                <p className="text-sm text-gray-600 font-medium">Round Trip</p>
-                                                                <div className="flex items-center">
-                                                                    {hasDiscount && (
-                                                                        <p className="text-sm text-gray-500 line-through mr-2">
-                                                                            {Math.round(pkg.round_trip_price)} TK
-                                                                        </p>
-                                                                    )}
-                                                                    <p className="text-xl font-bold text-blue-950">
-                                                                        {Math.round(roundTripPrice)} TK
-                                                                    </p>
-                                                                </div>
-                                                                <p className="text-xs text-gray-500">Per person</p>
-                                                            </div>
-                                                        )}
-                                                    </div>
-
-                                                    <div className="flex gap-3">
-                                                        <button
-                                                            style={{
-                                                                background: 'linear-gradient(90deg, #313881, #0678B4)',
-                                                            }}
-                                                            onClick={handleCall}
-                                                            className="flex items-center text-white px-4 py-2 rounded-lg transition-colors shadow-sm hover:shadow-md"
-                                                        >
-                                                            <FaPhoneAlt className="mr-2" />
-                                                            Call Now
-                                                        </button>
-
-                                                        <PrimaryButton
-                                                            style={{
-                                                                background: 'linear-gradient(90deg, #313881, #0678B4)',
-                                                            }}
-                                                            onClick={handleWhatsApp}
-                                                            bgColor="bg-green-800"
-                                                            hoverColor="hover:bg-green-600"
-                                                            icon={FaWhatsapp}
-                                                        >
-                                                            Book Now
-                                                        </PrimaryButton>
+                                                            <CTAButtons className="flex gap-3" />
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                            <div className="flex flex-col items-center space-y-2">
-                                <p className="text-lg text-red-600 font-semibold text-center">
-                                    To Buy Ticket Sign Up & Get A Call
-                                </p>
-                                <Link href="/get-a-call">
-                                    <button className="bg-gradient-to-r from-[#313881] to-[#0678B4] text-white px-4 py-2 rounded">
-                                        Sign Up Now
-                                    </button>
-                                </Link>
-                            </div>
-
-                        </div>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        })()
                     ) : (
                         <div className="text-center py-12 bg-gray-50 rounded-xl">
                             <svg
@@ -383,7 +271,7 @@ export default function Packages({ packages, foodAndDescription }) {
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <div className="flex justify-between items-center p-6 border-b">
-                                    <h3 className="text-xl font-bold text-gray-800">Package Details</h3>
+                                    <h3 className="text-xl font-bold text-gray-800">{modalTitle || 'Package Details'}</h3>
                                     <button
                                         onClick={closeModal}
                                         className="text-gray-500 hover:text-gray-700 text-2xl"

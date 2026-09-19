@@ -1,68 +1,67 @@
+"use client";
 
-const { default: Link } = require("next/link");
-const { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaCrown } = require("react-icons/fa");
-const { default: ContactForm } = require("../ContactForm/ContactForm");
-
+import Link from "next/link";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaFacebookF, FaKaaba } from "react-icons/fa";
+import ContactForm from "../ContactForm/ContactForm";
 
 export const Contact = () => {
   return (
-    <section className="bg-white min-h-screen py-10 ">
+    <section className="bg-white min-h-screen py-10">
       <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl font-bold text-center text-blue-950 mb-4">
-          Contact Us
+          যোগাযোগ করুন
         </h1>
         <p className="text-center px-6 text-gray-700 mb-10">
-          Reach out to MV Teknaf – we are here to help you with inquiries, bookings, and support.
+          আল-ওয়াকিয়া হজ কাফেলার সাথে যোগাযোগ করুন – আপনার হজ ও ওমরাহ সংক্রান্ত যেকোনো জিজ্ঞাসা, বুকিং ও সহযোগিতার জন্য আমরা সর্বদাই প্রস্তুত।
         </p>
 
         <div className="grid md:grid-cols-2 gap-10 bg-gray-50 py-8 rounded-lg shadow-md">
-          {/* Address */}
+          {/* Address & Contact Info */}
           <div className="space-y-6 px-8">
             <div className="flex items-start gap-4">
-              <FaMapMarkerAlt className="text-blue-600 text-xl mt-1" />
+              <FaMapMarkerAlt className="text-blue-600 text-xl mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-semibold text-lg text-gray-800">Office Address</h3>
-                <div className="text-gray-600 text-sm leading-relaxed space-y-1">
+                <h3 className="font-semibold text-lg text-gray-800">অফিসের ঠিকানা</h3>
+                <div className="text-gray-600 text-sm leading-relaxed space-y-1 mt-1">
                   <p>
-                    <span className="font-semibold text-gray-800">Dhaka:</span> South Breeze Center, Road number 11, Banani, Dhaka.
+                    <span className="font-semibold text-gray-800">ঢাকা:</span> সাউথ ব্রিজ সেন্টার, রোড নম্বর ১১, বনানী, ঢাকা।
                   </p>
                   <p>
-                    <span className="font-semibold text-gray-800">Chittagong:</span> 1147/A (3rd floor), CDA Avenue, GEC Circle, Chattogram.
+                    <span className="font-semibold text-gray-800">চট্টগ্রাম:</span> ১১৪৭/এ (৪র্থ তলা), সিডিএ এভিনিউ, জিইসি মোড়, চট্টগ্রাম।
                   </p>
                   <p>
-                    <span className="font-semibold text-gray-800">Khulna:</span> City Trade Centre, KDA Avenue, Khulna.
+                    <span className="font-semibold text-gray-800">খুলনা:</span> সিটি ট্রেড সেন্টার, কেডিএ এভিনিউ, খুলনা।
                   </p>
                 </div>
-
               </div>
             </div>
 
             {/* Phone */}
             <div className="flex items-start gap-4">
-              <FaPhoneAlt className="text-blue-600 text-xl mt-1" />
+              <FaPhoneAlt className="text-blue-600 text-xl mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-semibold text-lg text-gray-800">Phone</h3>
+                <h3 className="font-semibold text-lg text-gray-800">ফোন / হটলাইন</h3>
                 <p className="text-gray-600">
-                  01841999922 <br />
-
+                  ০১৮৪১-৯৯৯৯২২ <br />
+                  ০১৮৪১-৬৬৬৬৪৪
                 </p>
               </div>
             </div>
 
             {/* Email */}
             <div className="flex items-start gap-4">
-              <FaEnvelope className="text-blue-600 text-xl mt-1" />
+              <FaEnvelope className="text-blue-600 text-xl mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-semibold text-lg text-gray-800">Email</h3>
+                <h3 className="font-semibold text-lg text-gray-800">ইমেইল</h3>
                 <p className="text-gray-600">bookmebdltd@gmail.com</p>
               </div>
             </div>
 
             {/* Facebook */}
             <div className="flex items-start gap-4">
-              <FaFacebookF className="text-blue-600 text-xl mt-1" />
+              <FaFacebookF className="text-blue-600 text-xl mt-1 flex-shrink-0" />
               <div>
-                <h3 className="font-semibold text-lg text-gray-800">Follow Us on Facebook</h3>
+                <h3 className="font-semibold text-lg text-gray-800">ফেসবুক পেজ</h3>
                 <Link
                   href="https://facebook.com/bookmeltd"
                   target="_blank"
@@ -73,25 +72,26 @@ export const Contact = () => {
                 </Link>
               </div>
             </div>
-            <div className="md:pt-20">
+
+            {/* Brand Intro */}
+            <div className="md:pt-12">
               <hr className="border-gray-300 mb-4" />
               <h3 className="text-2xl text-blue-950 font-bold mb-4 flex items-center">
-                <FaCrown className="mr-2 text-blue-600 -mt-2" />
-                MV Teknaf
+                <FaKaaba className="mr-2 text-blue-600" />
+                আল-ওয়াকিয়া হজ কাফেলা
               </h3>
-                <p className="text-gray-700 mb-4 max-w-md">
-                  Experience luxury sea cruises from Cox&apos;s Bazar to Saint Martin&apos;s Island with premium
-                  amenities, breathtaking ocean views, and exceptional service.
-                </p>
+              <p className="text-gray-700 mb-4 max-w-md leading-relaxed text-sm">
+                সুন্নাহ সম্মত সঠিক দিকনির্দেশনা, উন্নত আবাসন, দেশীয় খাবার এবং সর্বোচ্চ নিরাপত্তার সাথে পবিত্র হজ ও ওমরাহ পালনে আপনার বিশ্বস্ত সঙ্গী।
+              </p>
             </div>
           </div>
 
-          {/* Optional: Contact Form */}
+          {/* Contact Form Section */}
           <div className="px-3">
             <ContactForm title="show" />
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

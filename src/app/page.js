@@ -1,40 +1,40 @@
 import BlogSection from "@/components/BlogSection/BlogSection";
 import { Contact } from "@/components/Contact/Contact";
-import CruisePromo from "@/components/CruisePromo/CruisePromo";
+import HajjPromo from "@/components/HajjPromo/HajjPromo";
 import FAQSection from "@/components/FAQSection/FAQSection";
 import ImageCarousel from "@/components/ImageCarousel/ImageCarousel";
 import Packages from "@/components/Packages/package";
-import PaymentMethods from "@/components/PaymentMethods/PaymentMethods";
 import Schedules from "@/components/Schedules/schedules";
-import StepProcess from "@/components/Step/step";
+import YouTubeSlider from "@/components/YouTubeSlider/YouTubeSlider";
 import Banner from "@/components/ui/Banner";
-import getFoodAndDescription from "@/lib/getFoodAndDescription";
 import getPackages from "@/lib/getPackages";
-import { getPropertyImages } from "@/lib/getPropertyImages";
-import getSchedules from "@/lib/getSchedules";
-import Image from "next/image";
+import getSliders from "@/lib/getSliders";
+import getFlights from "@/lib/getFlights";
+import getFaqs from "@/lib/getFaqs";
+import getYoutubeVideos from "@/lib/getYoutubeVideos";
 
 export default async function Home() {
 
-  const packages = await getPackages(822);
-  const schedules = await getSchedules(822);
-  const images = await getPropertyImages(822);
-  const foodAndDescription = await getFoodAndDescription(822)
+  const packages = await getPackages();
+  const flights = await getFlights();
+  const sliders = await getSliders();
+  const youtubeVideos = await getYoutubeVideos();
+  const faqs = await getFaqs();
   return (
     <main className="bg-gray-50">
       <div>
         <Banner
           imageUrl="/jeddah.jpg"        
-          title="দারুণ সব সুযোগ-সুবিধা নিয়ে সেরা উমরাহ ও হজ প্যাকেজ"         
+          title="দারুণ সব সুযোগ-সুবিধা নিয়ে সেরা উমরাহ ও হজ প্যাকেজ" 
+          subtitle="আপনার স্বপ্নের উমরাহ ও হজ যাত্রা শুরু করুন আমাদের সাথে"        
           heightClass=" h-[65vh] lg:h-[100vh]"
         />
-        <StepProcess />
-        <Packages packages={packages} foodAndDescription = {foodAndDescription} />
-        <Schedules schedules ={schedules} />
-        <PaymentMethods />
-        <CruisePromo />
-        <ImageCarousel propertyImages={images} />      
-        <FAQSection/>
+        <YouTubeSlider videos={youtubeVideos} />
+        <Packages packages={packages} />
+        <Schedules flights={flights} />
+        <HajjPromo />
+        <ImageCarousel sliders={sliders} />      
+        <FAQSection faqs={faqs} />
          <Contact/>  
         <BlogSection />
       </div>

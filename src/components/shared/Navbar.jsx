@@ -5,60 +5,67 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Roboto } from "next/font/google";
-import { Playfair_Display } from 'next/font/google';
 import {
   FaPhone,
   FaWhatsapp,
   FaBars,
   FaTimes,
+  FaBoxOpen,
   FaChevronRight,
-  FaChevronDown,
-  FaShip
+  FaChevronDown
 } from "react-icons/fa";
+import CustomPackageForm from "@/components/CustomPackageForm/CustomPackageForm";
+
+// Public airlines API — no auth / CSRF needed, CORS is open
+const AIRLINES_API = `${process.env.NEXT_PUBLIC_BASE_URL_V1}/api/airlines`;
 
 const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
-const Playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-playfair',
-  display: 'swap',
-});
 
 const BookMeHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isShipsDropdownOpen, setIsShipsDropdownOpen] = useState(false);
   const mobileMenuRef = useRef(null);
-  const shipsDropdownRef = useRef(null);
   const pathname = usePathname();
+
+  // Custom package request modal + airlines list for its form
+  const [isCustomFormOpen, setIsCustomFormOpen] = useState(false);
+  const [airlines, setAirlines] = useState([]);
+  const [airlinesLoading, setAirlinesLoading] = useState(false);
+  const airlinesLoadingRef = useRef(false);
+
+  const loadAirlines = useCallback(async () => {
+    if (airlinesLoadingRef.current) return;
+    airlinesLoadingRef.current = true;
+    setAirlinesLoading(true);
+    try {
+      const res = await fetch(AIRLINES_API, { headers: { Accept: "application/json" } });
+      const data = await res.json();
+      if (res.ok && Array.isArray(data?.airlines)) setAirlines(data.airlines);
+    } catch {
+      // silent — the airline field is optional
+    } finally {
+      airlinesLoadingRef.current = false;
+      setAirlinesLoading(false);
+    }
+  }, []);
+
+  // Load airlines on page load
+  useEffect(() => {
+    loadAirlines();
+  }, [loadAirlines]);
+
+  const openCustomForm = () => {
+    setIsCustomFormOpen(true);
+    if (airlines.length === 0 && !airlinesLoadingRef.current) loadAirlines(); // retry if page-load fetch failed
+  };
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   }, [isMobileMenuOpen]);
 
-  const toggleShipsDropdown = useCallback(() => {
-    setIsShipsDropdownOpen(!isShipsDropdownOpen);
-  }, [isShipsDropdownOpen]);
-
   const closeAllMenus = useCallback(() => {
     setIsMobileMenuOpen(false);
-    setIsShipsDropdownOpen(false);
   }, []);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (shipsDropdownRef.current && !shipsDropdownRef.current.contains(event.target)) {
-        setIsShipsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  // Check if a link is active
   const isActiveLink = (href) => {
     if (href === "/") {
       return pathname === href;
@@ -69,39 +76,19 @@ const BookMeHeader = () => {
   // Mobile menu component
   const MobileMenu = () => {
     return (
-      <div className={`${roboto.className} h-full flex flex-col overflow-hidden`}>
+      <div className={`${roboto.className} h-full flex flex-col overflow-hidden border`}>
         {/* Menu Header */}
-        <div className="flex justify-between p-4 border-b bg-gray-700 border-gray-200">
+        <div className="flex justify-between p-4 border-b bg-gray-700 border-gray-200 shadow-xl">
           <Link href="/" prefetch onClick={closeAllMenus} className="flex items-center cursor-pointer">
             <div className="flex items-center">
-              {/* Ship Logo on Left */}
-              <div className="ship-logo">
-                <Image
-                  src="/mv-logo.png"
-                  alt="Ship Logo"
-                  width={60}
-                  height={40}
-                  className="object-contain filter brightness-0 invert"
-                  priority
-                />
-              </div>
-
-              {/* Main Logo and Text on Right */}
-              <div className="flex flex-col ml-2">
-                <span className={`text-white text-sm italic font-semibold tracking-wide ${Playfair.className}`}>MV TEKNAF</span>
-                <div className="flex items-center">
-                  <Image
-                    src="/l.png"
-                    alt="logo"
-                    width={40}
-                    height={16}
-                    className="changeLogo filter brightness-0 invert"
-                    priority
-                  />
-                 <span className="text-xs mt-1 text-white italic">, Sales partner</span>
-                </div>
-
-              </div>
+              <Image
+                src="/alwaqiah-logo.png"
+                alt="আল-ওয়াকিয়া হজ কাফেলা"
+                width={170}
+                height={50}
+                className="object-contain"
+                priority
+              />
             </div>
           </Link>
         </div>
@@ -127,8 +114,8 @@ const BookMeHeader = () => {
 
             <li>
               <Link
-                href="/schedule"
-                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/schedule")
+                href="/packages"
+                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/packages")
                   ? "bg-blue-50 text-blue-600 font-semibold"
                   : "text-[#00026E]"
                   }`}
@@ -136,15 +123,15 @@ const BookMeHeader = () => {
                 prefetch
               >
                 <span className="font-medium">প্যাকেজ</span>
-                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/schedule") ? "text-blue-600" : "text-blue-400"
+                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/packages") ? "text-blue-600" : "text-blue-400"
                   }`} />
               </Link>
             </li>
 
             <li>
               <Link
-                href="/ticket"
-                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/ticket")
+                href="/info"
+                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/info")
                   ? "bg-blue-50 text-blue-600 font-semibold"
                   : "text-[#00026E]"
                   }`}
@@ -152,15 +139,15 @@ const BookMeHeader = () => {
                 prefetch
               >
                 <span className="font-medium">তথ্য</span>
-                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/ticket") ? "text-blue-600" : "text-blue-400"
+                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/packages") ? "text-blue-600" : "text-blue-400"
                   }`} />
               </Link>
             </li>
 
             <li>
               <Link
-                href="/payment"
-                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/payment")
+                href="/faqs"
+                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/faqs")
                   ? "bg-blue-50 text-blue-600 font-semibold"
                   : "text-[#00026E]"
                   }`}
@@ -168,7 +155,7 @@ const BookMeHeader = () => {
                 prefetch
               >
                 <span className="font-medium">প্রশ্নোত্তর</span>
-                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/payment") ? "text-blue-600" : "text-blue-400"
+                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/faqs") ? "text-blue-600" : "text-blue-400"
                   }`} />
               </Link>
             </li>
@@ -177,8 +164,8 @@ const BookMeHeader = () => {
 
             <li>
               <Link
-                href="/contact"
-                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/contact")
+                href="/about"
+                className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/about")
                   ? "bg-blue-50 text-blue-600 font-semibold"
                   : "text-[#00026E]"
                   }`}
@@ -186,7 +173,7 @@ const BookMeHeader = () => {
                 prefetch
               >
                 <span className="font-medium">আল-ওয়াকিয়া সম্পর্কে</span>
-                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/contact") ? "text-blue-600" : "text-blue-400"
+                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/about") ? "text-blue-600" : "text-blue-400"
                   }`} />
               </Link>
             </li>
@@ -244,18 +231,19 @@ const BookMeHeader = () => {
   };
 
   return (
-    <header className={`header-area-three bg-white md:bg-transparent ${roboto.className} `}>
-      <div className="main-header absolute w-full z-50 bg-transparent  ">
+    <>
+      <header className={`header-area-three bg-white md:bg-transparent ${roboto.className} `}>
+      <div className="main-header absolute w-full z-50 bg-transparent border-b border-gray-600">
         <div className="header-bottom text-[#00026E]">
           <div className="container w-[95%] lg:w-[86%] mx-auto">
             <div className="flex justify-between items-center py-2">
               {/* Updated Logo Section - Entire area clickable */}
               <Link href="/" prefetch className="logo flex items-center cursor-pointer">
-                {/* Ship Logo on Left */}
-                <div className="ship-logo">
+                {/* Al-Waqiah Logo */}
+                <div className="nav-logo">
                   <Image
                     src="/alwaqiah-logo.png"
-                    alt="Ship Logo"
+                    alt="আল-ওয়াকিয়া হজ কাফেলা"
                     width={170}
                     height={50}
                     className="object-contain filter  "
@@ -281,8 +269,8 @@ const BookMeHeader = () => {
                 </Link>
 
                 <Link
-                  href="/schedule"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/schedule")
+                  href="/packages"
+                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/packages")
                     ? "text-white border-b-2 border-red-100"
                     : "hover:text-white text-white"
                     }`}
@@ -292,19 +280,21 @@ const BookMeHeader = () => {
                 </Link>
 
                 <Link
-                  href="/ticket"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/ticket")
+                  href="/info"
+                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/info")
                     ? "text-white border-b-2 border-red-100"
                     : "hover:text-white text-white"
                     }`}
                   prefetch
                 >
-                  তথ্য
+                   তথ্য
                 </Link>
 
+                
+
                 <Link
-                  href="/payment"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/payment")
+                  href="/faqs"
+                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/faqs")
                     ? "text-white border-b-2 border-red-100"
                     : "hover:text-white text-white"
                     }`}
@@ -316,12 +306,12 @@ const BookMeHeader = () => {
               
 
                 <Link
-                  href="/contact"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/contact")
+                  href="/about"
+                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/about")
                     ? "text-white border-b-2  border-red-100"
                     : "hover:text-white text-white"
                     }`}
-                  prefetch 
+                  prefetch
                 >
                   আল-ওয়াকিয়া সম্পর্কে
                 </Link>
@@ -338,68 +328,27 @@ const BookMeHeader = () => {
               </div>
 
               {/* Desktop Contact Info */}
-              <div className="ml-3 hidden lg:flex items-center justify-center gap-2">
-                <div className="flex items-center">
-                  <a
-                    href="tel:01841999922"
-                    className="ml-[10px] mt-[9px]"
-                  >
-                    <div className="phone-call md:w-[50px] md:h-[50px] w-[36px] h-[36px] ml-[15px]">
-                      <FaPhone className="md:ml-[17px] md:mt-[17px] mt-[8px] ml-[11px]" />
-                    </div>
-                  </a>
-                  <a
-                    href="https://wa.me/+8801841999922"
-                    className="mr-[10px] ml-[5px]"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="btn-whatsapp-pulse btn-whatsapp-pulse-border md:w-[50px] md:h-[50px] w-[36px] h-[36px] md:mt-[0px] mt-[-5px] ml-[15px]">
-                      <FaWhatsapp className="w-[25px] h-[25px] text-white" />
-                    </span>
-                  </a>
-
-                  <div>
-                    <p className="text-sm text-white">Call Anytime</p>
-                    <h4 className="text-lg font-semibold">
-                      <a href="tel:01841999922" className="text-white">
-                        01841999922
-                      </a>
-                    </h4>
-                  </div>
+              <div className="ml-3 hidden lg:flex items-center gap-4">
+                <button type="button" onClick={openCustomForm} className="flex items-center gap-2 rounded-full px-4 py-2.5 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
+                  <FaBoxOpen className="text-base" />
+                  <span>কাস্টমাইজড প্যাকেজ</span>
+                </button>
+                <div>
+                  <p className="text-sm text-white">Call Anytime</p>
+                  <h4 className="text-lg font-semibold">
+                    <a href="tel:01841999922" className="text-white">01841999922</a>
+                  </h4>
                 </div>
               </div>
 
-              {/* Mobile Menu Button and Icons */}
-              <div className="lg:hidden  flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <a href="tel:01841999922" className="w-[38px] h-[38px]">
-                    <div className="phone-call w-[36px] h-[36px]">
-                      <FaPhone className="mt-[9px] ml-[10px]" />
-                    </div>
-                  </a>
-                  <a
-                    href="https://wa.me/+8801841999922"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-[38px] h-[38px]"
-                  >
-                    <span className="btn-whatsapp-pulse btn-whatsapp-pulse-border w-[36px] h-[36px]">
-                      <FaWhatsapp className="w-[20px] h-[20px] text-white mt-[0px] ml-[0px]" />
-                    </span>
-                  </a>
-                </div>
-
-                <button
-                  onClick={toggleMobileMenu}
-                  className="text-[#f9f9fc] focus:outline-none"
-                  aria-label="Toggle menu"
-                >
-                  {isMobileMenuOpen ? (
-                    <FaTimes className="w-6 h-6" />
-                  ) : (
-                    <FaBars className="w-6 h-6" />
-                  )}
+              {/* Mobile Menu Button */}
+              <div className="lg:hidden flex items-center gap-3">
+                <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
+                  <FaBoxOpen />
+                  <span>কাস্টমাইজড প্যাকেজ</span>
+                </button>
+                <button onClick={toggleMobileMenu} className="text-[#f9f9fc] focus:outline-none" aria-label="Toggle menu">
+                  {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
                 </button>
               </div>
             </div>
@@ -426,6 +375,10 @@ const BookMeHeader = () => {
         )}
       </div>
     </header>
+
+      {/* Custom package request modal */}
+      {isCustomFormOpen && <CustomPackageForm onClose={() => setIsCustomFormOpen(false)} airlines={airlines} airlinesLoading={airlinesLoading} />}
+    </>
   );
 };
 

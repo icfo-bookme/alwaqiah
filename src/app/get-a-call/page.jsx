@@ -3,8 +3,8 @@ import Banner from "@/components/ui/Banner";
  // Adjust path as needed
 
 export const metadata = {
-  title: "Get a Call | MV Teknaf — Sea Cruises from Cox's Bazar to Saint Martin's Island",
-  description: "Request a call from our team to assist with your MV Teknaf sea cruise booking. Get expert guidance, schedule support, and answers to all your queries.",
+  title: "কল পান | আল-ওয়াকিয়া হজ কাফেলা",
+  description: "আল-ওয়াকিয়া হজ কাফেলার টিম থেকে কল চাইুন — হজ ও ওমরাহ প্যাকেজ বুকিং, ফ্লাইট সময়সূচী ও যেকোনো প্রশ্নে বিশেষজ্ঞ পরামর্শ পান।",
 }
 
 
@@ -13,7 +13,7 @@ export default function Page() {
     <div>
       <Banner
         imageUrl="/13.png"
-        title="Get A Call"
+        title="কল পান"
         subtitle=""
         heightClass=" h-[50vh] lg:h-[70vh]"
       />
@@ -21,10 +21,10 @@ export default function Page() {
       <section className="bg-white min-h-screen py-10 px-6">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
-            Get A Call
+            কল পান
           </h1>
           <p className="text-center text-gray-500 mb-10">
-            Please fill out the form below, and we will get back to you as soon as possible.
+            নিচের ফর্মটি পূরণ করুন — আমাদের টিম যত দ্রুত সম্ভব আপনার সাথে যোগাযোগ করবে।
           </p>
 
           {/* Contact Form Here */}

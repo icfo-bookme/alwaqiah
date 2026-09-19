@@ -1,10 +1,10 @@
-const getPackages = async (id) => {
+const getPackages = async (type) => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/ship/packages/${id}`, {
-      next: { revalidate: 3600 }, 
-    });
+    const query = type ? `?type=${encodeURIComponent(type)}` : '';
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_V1}/api/packages${query}`);
     const data = await res.json();
-    return data;
+    // API returns { status, count, packages: [...] } — extract the packages array
+    return  data?.packages || [];
   } catch (error) {
     return [];
   }

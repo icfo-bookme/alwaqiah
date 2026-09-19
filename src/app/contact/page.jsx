@@ -2,29 +2,29 @@ import ContactForm from "@/components/ContactForm/ContactForm";
 import Banner from "@/components/ui/Banner";
 import Image from "next/image";
 import Link from "next/link";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaCrown } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaKaaba } from "react-icons/fa";
 
 export const metadata = {
-  title: "Contact Us | MV Teknaf — Sea Cruises",
-  description: "Get in touch with MV Teknaf for sea cruises from CoxCox's Bazarapos;s Bazar to Saint MartinSaint Martin's Islandapos;s Island. Find our office locations, phone numbers, email address, and follow us on social media.",
+  title: "যোগাযোগ | আল-ওয়াকিয়া হজ কাফেলা",
+  description: "আল-ওয়াকিয়া হজ কাফেলার সাথে যোগাযোগ করুন — হজ ও ওমরাহ প্যাকেজ সংক্রান্ত প্রশ্ন, বুকিং ও যেকোনো সহায়তায় আমাদের অফিস, ফোন ও ইমেইলে যুক্ত হোন।",
 };
 
 export default function ContactUs() {
   return (
     <>
       <Banner
-        imageUrl="/13.png"
-        title="Contact Us"
+        imageUrl="/7.jpg"
+        title="যোগাযোগ"
         subtitle=""
         heightClass=" h-[50vh] lg:h-[70vh]"
       />
       <section className="bg-white min-h-screen py-10 ">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl font-bold text-center text-gray-800 mb-4">
-            Contact Us
+            যোগাযোগ
           </h1>
           <p className="text-center px-6 text-gray-500 mb-10">
-            Reach out to MV Teknaf – we are here to help you with inquiries, bookings, and support.
+            আল-ওয়াকিয়া হজ কাফেলার সাথে যোগাযোগ করুন — প্রশ্ন, বুকিং ও যেকোনো সহায়তায় আমরা আপনার পাশে আছি।
           </p>
 
           <div className="grid md:grid-cols-2 gap-10 bg-gray-50 py-8 rounded-lg shadow-md">
@@ -33,7 +33,7 @@ export default function ContactUs() {
               <div className="flex items-start gap-4">
                 <FaMapMarkerAlt className="text-blue-600 text-xl mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-800">Office Address</h3>
+                  <h3 className="font-semibold text-lg text-gray-800">অফিস ঠিকানা</h3>
                   <p className="text-gray-600">
                     IFCO Complex (2nd floor), GEC Circle, <br />
                     CDA Avenue, Chattogram
@@ -45,7 +45,7 @@ export default function ContactUs() {
               <div className="flex items-start gap-4">
                 <FaPhoneAlt className="text-blue-600 text-xl mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-800">Phone</h3>
+                  <h3 className="font-semibold text-lg text-gray-800">ফোন</h3>
                   <p className="text-gray-600">
                     01841999922 <br />
 
@@ -57,7 +57,7 @@ export default function ContactUs() {
               <div className="flex items-start gap-4">
                 <FaEnvelope className="text-blue-600 text-xl mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-800">Email</h3>
+                  <h3 className="font-semibold text-lg text-gray-800">ইমেইল</h3>
                   <p className="text-gray-600">bookmebdltd@gmail.com</p>
                 </div>
               </div>
@@ -66,7 +66,7 @@ export default function ContactUs() {
               <div className="flex items-start gap-4">
                 <FaFacebookF className="text-blue-600 text-xl mt-1" />
                 <div>
-                  <h3 className="font-semibold text-lg text-gray-800">Follow Us on Facebook</h3>
+                  <h3 className="font-semibold text-lg text-gray-800">ফেসবুকে আমাদের ফলো করুন</h3>
                   <Link
                     href="https://facebook.com/bookmeltd"
                     target="_blank"
@@ -80,12 +80,11 @@ export default function ContactUs() {
               <div className="md:pt-20">
                 <hr className="border-gray-300 mb-4" />
                 <h3 className="text-2xl text-blue-950 font-bold mb-4 flex items-center">
-                  <FaCrown className="mr-2 text-blue-600 -mt-2" />
-                  MV Teknaf
+                  <FaKaaba className="mr-2 text-yellow-500 -mt-2" />
+                  আল-ওয়াকিয়া হজ কাফেলা
                 </h3>
                 <p className="text-gray-700 mb-4 max-w-md">
-                  Experience luxury sea cruises from Cox&apos;s Bazar to Saint Martin&apos;s Island with premium
-                  amenities, breathtaking ocean views, and exceptional service.
+                  অভিজ্ঞ আলেম ও মুয়াল্লিমের সরাসরি তত্ত্বাবধানে সুন্নাহ অনুযায়ী বিশ্বস্ত হজ ও ওমরাহ প্যাকেজ, ভিসা, এয়ার টিকিট ও আবাসন সেবা।
                 </p>
               </div>
             </div>

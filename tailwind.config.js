@@ -19,9 +19,6 @@ module.exports = {
         background: "var(--background)", 
         foreground: "var(--foreground)", 
       },
-      fontFamily: {
-        luxia: ['Luxia', 'sans-serif'],
-      },
 
        keyframes: {
         'shake-vertical': {
