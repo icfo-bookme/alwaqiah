@@ -18,9 +18,19 @@ jobs:
           script_stop: true
           command_timeout: 30m
           script: |
+            set -e
             cd /var/www/alwaqiah
-            git pull origin main
+            echo "### Server was on commit: $(git rev-parse --short HEAD)"
+            git fetch origin main
+            # Force-sync: server repo must exactly match GitHub main
+            # (fixes stale/conflicted server repos that silently skip updates)
+            git reset --hard origin/main
+            echo "### Server now on commit: $(git rev-parse --short HEAD)"
             npm install
             npm run build
             pm2 restart alwaqiah --update-env
+            sleep 5
+            pm2 status alwaqiah
+            echo "### Health check (HTTP 200/307 expected, 000 = app not up):"
+            curl -s -o /dev/null -w "127.0.0.1:3001 -> HTTP %{http_code}\n" http://127.0.0.1:3001 || true
 
