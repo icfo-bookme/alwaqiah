@@ -160,7 +160,7 @@ const BookMeHeader = () => {
               </Link>
             </li>
 
-           
+
 
             <li>
               <Link
@@ -178,7 +178,7 @@ const BookMeHeader = () => {
               </Link>
             </li>
 
-             <li>
+            <li>
               <Link
                 href="/contact"
                 className={`flex items-center justify-between py-3 px-4 text-sm hover:bg-blue-50 rounded-lg transition-colors duration-200 group ${isActiveLink("/contact")
@@ -233,148 +233,148 @@ const BookMeHeader = () => {
   return (
     <>
       <header className={`header-area-three bg-white md:bg-transparent ${roboto.className} `}>
-      <div className="main-header absolute w-full z-50 bg-transparent border-b border-gray-600">
-        <div className="header-bottom text-[#00026E]">
-          <div className="container w-[95%] lg:w-[86%] mx-auto">
-            <div className="flex justify-between items-center py-2">
-              {/* Updated Logo Section - Entire area clickable */}
-              <Link href="/" prefetch className="logo flex items-center cursor-pointer">
-                {/* Al-Waqiah Logo */}
-                <div className="nav-logo">
-                  <Image
-                    src="/alwaqiah-logo.png"
-                    alt="আল-ওয়াকিয়া হজ কাফেলা"
-                    width={170}
-                    height={50}
-                    className="object-contain filter  "
-                    priority
-                  />
+        <div className="main-header absolute w-full z-50 bg-transparent border-b border-gray-600">
+          <div className="header-bottom text-[#00026E]">
+            <div className="container w-[95%] lg:w-[86%] mx-auto">
+              <div className="flex justify-between items-center py-2">
+                {/* Updated Logo Section - Entire area clickable */}
+                <Link href="/" prefetch className="logo flex items-center cursor-pointer">
+                  {/* Al-Waqiah Logo */}
+                  <div className="nav-logo">
+                    <Image
+                      src="/alwaqiah-logo.png"
+                      alt="আল-ওয়াকিয়া হজ কাফেলা"
+                      width={170}
+                      height={50}
+                      className="object-contain filter  "
+                      priority
+                    />
+                  </div>
+
+                  {/* Main Logo and Text on Right */}
+
+                </Link>
+
+                {/* Desktop Navigation */}
+                <div className="hidden ml-10 lg:flex items-center gap-6">
+                  <Link
+                    href="/"
+                    className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/")
+                      ? "text-white font-bold border-b-2 border-red-100"
+                      : "hover:text-white text-white"
+                      }`}
+                    prefetch
+                  >
+                    হোম
+                  </Link>
+
+                  <Link
+                    href="/packages"
+                    className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/packages")
+                      ? "text-white border-b-2 border-red-100"
+                      : "hover:text-white text-white"
+                      }`}
+                    prefetch
+                  >
+                    প্যাকেজ
+                  </Link>
+
+                  <Link
+                    href="/info"
+                    className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/info")
+                      ? "text-white border-b-2 border-red-100"
+                      : "hover:text-white text-white"
+                      }`}
+                    prefetch
+                  >
+                    তথ্য
+                  </Link>
+
+
+
+                  <Link
+                    href="/faqs"
+                    className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/faqs")
+                      ? "text-white border-b-2 border-red-100"
+                      : "hover:text-white text-white"
+                      }`}
+                    prefetch
+                  >
+                    প্রশ্নোত্তর
+                  </Link>
+
+
+
+                  <Link
+                    href="/about"
+                    className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/about")
+                      ? "text-white border-b-2  border-red-100"
+                      : "hover:text-white text-white"
+                      }`}
+                    prefetch
+                  >
+                    আল-ওয়াকিয়া সম্পর্কে
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/contact")
+                      ? "text-white border-b-2  border-red-100"
+                      : "hover:text-white text-white"
+                      }`}
+                    prefetch
+                  >
+                    যোগাযোগ
+                  </Link>
                 </div>
 
-                {/* Main Logo and Text on Right */}
-              
-              </Link>
-
-              {/* Desktop Navigation */}
-              <div className="hidden ml-10 lg:flex items-center gap-6">
-                <Link
-                  href="/"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/")
-                    ? "text-white font-bold border-b-2 border-red-100"
-                    : "hover:text-white text-white"
-                    }`}
-                  prefetch
-                >
-                  হোম
-                </Link>
-
-                <Link
-                  href="/packages"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/packages")
-                    ? "text-white border-b-2 border-red-100"
-                    : "hover:text-white text-white"
-                    }`}
-                  prefetch
-                >
-                  প্যাকেজ
-                </Link>
-
-                <Link
-                  href="/info"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/info")
-                    ? "text-white border-b-2 border-red-100"
-                    : "hover:text-white text-white"
-                    }`}
-                  prefetch
-                >
-                   তথ্য
-                </Link>
-
-                
-
-                <Link
-                  href="/faqs"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/faqs")
-                    ? "text-white border-b-2 border-red-100"
-                    : "hover:text-white text-white"
-                    }`}
-                  prefetch
-                >
-                  প্রশ্নোত্তর
-                </Link>
-
-              
-
-                <Link
-                  href="/about"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/about")
-                    ? "text-white border-b-2  border-red-100"
-                    : "hover:text-white text-white"
-                    }`}
-                  prefetch
-                >
-                  আল-ওয়াকিয়া সম্পর্কে
-                </Link>
-                <Link
-                  href="/contact"
-                  className={`text-sm font-semibold transition-colors duration-200 ${isActiveLink("/contact")
-                    ? "text-white border-b-2  border-red-100"
-                    : "hover:text-white text-white"
-                    }`}
-                  prefetch 
-                >
-                  যোগাযোগ
-                </Link>
-              </div>
-
-              {/* Desktop Contact Info */}
-              <div className="ml-3 hidden lg:flex items-center gap-4">
-                <button type="button" onClick={openCustomForm} className="flex items-center gap-2 rounded-full px-4 py-2.5 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
-                  <FaBoxOpen className="text-base" />
-                  <span>কাস্টমাইজড প্যাকেজ</span>
-                </button>
-                <div>
-                  <p className="text-sm text-white">Call Anytime</p>
-                  <h4 className="text-lg font-semibold">
-                    <a href="tel:01841999922" className="text-white">01841999922</a>
-                  </h4>
+                {/* Desktop Contact Info */}
+                <div className="ml-3 hidden lg:flex items-center gap-4">
+                  <button type="button" onClick={openCustomForm} className="flex items-center gap-2 rounded-full px-4 py-2.5 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
+                    <FaBoxOpen className="text-base" />
+                    <span>কাস্টমাইজড প্যাকেজ</span>
+                  </button>
+                  <div>
+                    <p className="text-sm text-white">Call Anytime</p>
+                    <h4 className="text-lg font-semibold">
+                      <a href="tel:01841999922" className="text-white">01841999922</a>
+                    </h4>
+                  </div>
                 </div>
-              </div>
 
-              {/* Mobile Menu Button */}
-              <div className="lg:hidden flex items-center gap-3 w-40">
-                <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
-                  {/* <FaBoxOpen /> */}
-                  <span>কাস্টমাইজড প্যাকেজ</span>
-                </button>
-                <button onClick={toggleMobileMenu} className="text-[#f9f9fc] focus:outline-none" aria-label="Toggle menu">
-                  {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
-                </button>
+                {/* Mobile Menu Button */}
+                <div className="lg:hidden flex items-center gap-3 w-40">
+                  <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
+                    {/* <FaBoxOpen /> */}
+                    <span>কাস্টমাইজড প্যাকেজ</span>
+                  </button>
+                  <button onClick={toggleMobileMenu} className="text-[#f9f9fc] focus:outline-none" aria-label="Toggle menu">
+                    {isMobileMenuOpen ? <FaTimes className="w-6 h-6" /> : <FaBars className="w-6 h-6" />}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
+
+          {/* Enhanced Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden fixed inset-0 z-20">
+              {/* Backdrop */}
+              <div
+                className="absolute inset-0 bg-black/50"
+                onClick={closeAllMenus}
+              ></div>
+
+              {/* Menu Content */}
+              <div
+                ref={mobileMenuRef}
+                className="absolute top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out"
+              >
+                <MobileMenu />
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Enhanced Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-20">
-            {/* Backdrop */}
-            <div
-              className="absolute inset-0 bg-black/50"
-              onClick={closeAllMenus}
-            ></div>
-
-            {/* Menu Content */}
-            <div
-              ref={mobileMenuRef}
-              className="absolute top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out"
-            >
-              <MobileMenu />
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
+      </header>
 
       {/* Custom package request modal */}
       {isCustomFormOpen && <CustomPackageForm onClose={() => setIsCustomFormOpen(false)} airlines={airlines} airlinesLoading={airlinesLoading} />}
