@@ -50,7 +50,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
 
           {/* Subtitle */}
           {subtitle && (
-            <p className="text-sm md:text-lg lg:text-xl text-[#71C3C7] font-light max-w-xl drop-shadow-md font-display">
+            <p className="text-base md:text-lg lg:text-xl text-[#71C3C7] font-light max-w-xl drop-shadow-md font-display">
               {subtitle}
             </p>
           )}
