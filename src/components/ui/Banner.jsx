@@ -42,7 +42,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
 
           {/* Title */}
           {title && (
-            <h1 className={`lg:-mb-6 text-3xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
+            <h1 className={`lg:-mb-6 text-4xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
               {title}
             </h1>
           )}
