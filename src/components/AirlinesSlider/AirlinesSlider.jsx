@@ -12,7 +12,7 @@ const AirlinesSlider = ({ airlines = [] }) => {
   const slides = airlines.length >= 12 ? airlines : Array.from({ length: 12 }, (_, i) => airlines[i % airlines.length]);
 
   return (
-    <section className="bg-white py-8 md:py-16">
+    <section className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-bold text-[#313881] md:text-3xl">আমাদের ফ্লাইট পার্টনার</h2>

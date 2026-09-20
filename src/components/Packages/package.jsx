@@ -64,7 +64,7 @@ export default function Packages({ packages }) {
 
     return (
         <div className='bg-[#FFFFFF] pb-10'>
-            <div className="max-w-5xl mx-auto md:px-4 px-2">
+            <div className="max-w-5xl mx-auto md:px-4 px-4">
                 <div className={`  text-center mb-12`}>
                     <h1 className="text-2xl  text-center text-blue-950  pt-2 md:pt-5 lg:text-3xl font-bold mb-1">
                         প্যাকেজ সমূহ
