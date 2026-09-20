@@ -18,9 +18,9 @@ export default async function Page() {
         subtitle=""
         heightClass=" h-[50vh] lg:h-[70vh]"
       />
-
-      <Packages packages={packages} />
-    
+      <div className="pt-5">
+        <Packages packages={packages} />
+      </div>
     </div>
   )
 }
