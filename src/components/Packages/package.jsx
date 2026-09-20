@@ -67,8 +67,12 @@ export default function Packages({ packages }) {
             <div className="max-w-5xl mx-auto md:px-4 ">
                 <div className={`  text-center mb-12`}>
                     <h1 className="text-2xl  text-center text-blue-950  pt-2 md:pt-5 lg:text-3xl font-bold mb-1">
-                        আল-ওয়াকিয়া হজ কাফেলা-র  হজ ও ওমরাহ <span className="text-red-700">প্যাকেজসমূহ </span>
+                        প্যাকেজ সমূহ
                     </h1>
+
+                    <p className="mt-2 text-gray-600 text-sm md:text-base">
+                        আমাদের উমরাহ ও হজ প্যাকেজ সমূহের বিস্তারিত তথ্য দেখুন
+                    </p>
                     <div className="mt-3 w-24 h-1 rounded-full mx-auto bg-gradient-to-r from-[#313881] to-[#0678B4]"></div>
                     {/* Umrah / Hajj Tabs */}
                     <div className="flex justify-center gap-3 mt-6 mb-4">
