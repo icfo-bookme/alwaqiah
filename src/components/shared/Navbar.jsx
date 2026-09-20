@@ -4,7 +4,6 @@ import React, { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Roboto } from "next/font/google";
 import {
   FaPhone,
   FaWhatsapp,
@@ -17,8 +16,6 @@ import CustomPackageForm from "@/components/CustomPackageForm/CustomPackageForm"
 
 // Public airlines API — no auth / CSRF needed, CORS is open
 const AIRLINES_API = `${process.env.NEXT_PUBLIC_BASE_URL_V1}/api/airlines`;
-
-const roboto = Roboto({ subsets: ["latin"], weight: ["400"] });
 
 const BookMeHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -70,7 +67,7 @@ const BookMeHeader = () => {
 
   // Mobile menu markup (stateless — rendered inline instead of a nested component)
   const renderMobileMenu = () => (
-      <div className={`${roboto.className} h-full flex flex-col overflow-hidden border`}>
+      <div className="h-full flex flex-col overflow-hidden border">
         {/* Menu Header */}
         <div className="flex justify-between p-4 border-b bg-gray-700 border-gray-200 shadow-xl">
           <Link href="/" prefetch onClick={closeAllMenus} className="flex items-center cursor-pointer">
@@ -225,7 +222,7 @@ const BookMeHeader = () => {
 
   return (
     <>
-      <header className={`header-area-three bg-white md:bg-transparent ${roboto.className} `}>
+      <header className="header-area-three bg-white md:bg-transparent">
         <div className="main-header absolute w-full z-50 bg-transparent border-b border-gray-600">
           <div className="header-bottom text-[#00026E]">
             <div className="container w-[95%] lg:w-[86%] mx-auto">

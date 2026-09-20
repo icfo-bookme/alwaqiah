@@ -8,6 +8,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        // Inter for Latin, Tiro Bangla for Bengali (per-character fallback)
+        sans: ['var(--font-inter)', 'var(--font-tiro-bangla)', 'system-ui', 'sans-serif'],
+        // Playfair Display for display/banner text, Tiro Bangla as Bengali fallback
+        display: ['var(--font-playfair)', 'var(--font-tiro-bangla)', 'serif'],
+      },
       container: {
         center: true, // Centers the container
         padding: '0', // Removes default padding

@@ -1,8 +1,5 @@
 import Image from 'next/image';
-import { Roboto } from 'next/font/google';
 import CTAButtons from '../ui/CTAButtons';
-
-const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 
 const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -35,7 +32,7 @@ export default function Schedules({ flights = [] }) {
 
             {/* Flights Section */}
             {sortedFlights.length > 0 ? (
-            <div className={`bg-gray-100 ${roboto.className} rounded-lg shadow-md max-w-5xl mx-auto my-6 w-full`}>
+            <div className={`bg-gray-100 rounded-lg shadow-md max-w-5xl mx-auto my-6 w-full`}>
                 <div className="p-4 sm:p-6 w-full ">
                     <table className="w-full table-auto divide-y divide-gray-200 min-w-full">
                         <thead>
@@ -94,7 +91,7 @@ export default function Schedules({ flights = [] }) {
                 </div>
             </div>
             ) : (
-                <div className={`bg-gray-100 ${roboto.className} rounded-lg shadow-md max-w-5xl mx-auto my-6 w-full`}>
+                <div className={`bg-gray-100 rounded-lg shadow-md max-w-5xl mx-auto my-6 w-full`}>
                     <div className="text-center py-12">
                         <h3 className="text-xl font-semibold text-gray-700 mb-2">কোনো ফ্লাইট সময়সূচী পাওয়া যায়নি</h3>
                         <p className="text-gray-600 max-w-md mx-auto px-4">

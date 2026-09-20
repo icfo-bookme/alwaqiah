@@ -16,7 +16,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
   const defaultImage = "/hero.png";
 
   return (
-    <div className={`relative w-full ${heightClass || 'h-[60vh]'} overflow-hidden shadow-2xl`}>
+    <div className={`relative w-full ${heightClass || 'h-[60vh]'} overflow-hidden shadow-2xl ${playfair.variable}`}>
       {/* Background Image */}
       <Image
         src={imageUrl || defaultImage}
@@ -36,21 +36,21 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
         <div className={`text-white mt-10 w-full max-w-4xl  space-y-3 md:space-y-3 text-left `}>
           {/* Ship Name */}
           {ship && (
-            <h2 className={`text-lg md:text-lg lg:text-4xl md:-mb-5 -mb-3 italic drop-shadow-md ${playfair.className}`}>
+            <h2 className="text-lg md:text-lg lg:text-4xl md:-mb-5 -mb-3 italic drop-shadow-md font-display">
               {ship}
             </h2>
           )}
 
           {/* Title */}
           {title && (
-            <h1 className={` text-4xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
+            <h1 className="text-4xl md:text-3xl lg:text-5xl font-bold leading-tight drop-shadow-lg font-display">
               {title}
             </h1>
           )}
 
           {/* Subtitle */}
           {subtitle && (
-            <p className={` text-sm md:text-lg lg:text-xl text-[#71C3C7] font-light max-w-xl drop-shadow-md ${playfair.className}`}>
+            <p className="text-sm md:text-lg lg:text-xl text-[#71C3C7] font-light max-w-xl drop-shadow-md font-display">
               {subtitle}
             </p>
           )}
@@ -79,7 +79,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
           </div>
           <button
             onClick={() => window.open('https://wa.me/+8801841999922', '_blank')}
-            className={`${playfair.className} flex items-center justify-center bg-[#C70909] text-white font-medium px-4 py-2 rounded-3xl shadow-lg hover:bg-white hover:text-red-800 transition-all duration-300 text-sm md:text-base`}
+            className="font-display flex items-center justify-center bg-[#C70909] text-white font-medium px-4 py-2 rounded-3xl shadow-lg hover:bg-white hover:text-red-800 transition-all duration-300 text-sm md:text-base"
           >
             <Image
               src="/whatsapp.png"

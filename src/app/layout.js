@@ -2,11 +2,22 @@ import "./globals.css";
 import Header from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import FloatingContact from "@/components/shared/FloatingContact";
-import { Inter } from "next/font/google";
+import { Inter, Tiro_Bangla } from "next/font/google";
 
+// Inter — Latin/English base. Tiro Bangla — Bengali glyphs. Both are attached as CSS
+// variables; the Tailwind `font-sans` stack (Inter → Tiro Bangla → system) picks
+// Inter for Latin characters and Tiro Bangla for Bengali, on every device.
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
+});
+
+const tiroBangla = Tiro_Bangla({
+  subsets: ["bengali", "latin"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-tiro-bangla",
 });
 
 export const metadata = {
@@ -62,8 +73,8 @@ export default function RootLayout({ children }) {
           referrerPolicy="no-referrer"
         />
       </head>
-      {/* Apply Inter font using className */}
-      <body className={`${inter.className} antialiased`}>
+      {/* Font stack: Inter (Latin) → Tiro Bangla (Bengali) → system, via Tailwind font-sans */}
+      <body className={`${inter.variable} ${tiroBangla.variable} font-sans antialiased`}>
         <Header />
         {children}
         <Footer />

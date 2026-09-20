@@ -9,10 +9,7 @@ import {
     FaCalendarDays,
     FaUserGroup
 } from 'react-icons/fa6';
-import { Roboto } from 'next/font/google';
 import CTAButtons from '../ui/CTAButtons';
-
-const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
 
 export default function Packages({ packages }) {
     const [selectedDescription, setSelectedDescription] = useState(null);
@@ -99,7 +96,7 @@ export default function Packages({ packages }) {
                     </div>
 
                 </div>
-                <div className={`${roboto.className}`}>
+                <div>
                     {packages && packages.length > 0 ? (
                         (() => {
                             const filteredPackages = packages.filter(

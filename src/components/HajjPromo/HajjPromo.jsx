@@ -2,9 +2,8 @@
 
 import Image from 'next/image';
 import kaabaImage from '../../../public/7.jpg';
-import { Roboto } from 'next/font/google';
 import Link from 'next/link';
-const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });
+
 export default function HajjPromo() {
   return (
     <section className=" max-w-6xl mx-auto  text-gray-900 px-6 py-12 flex flex-col-reverse md:flex-row items-center justify-between gap-10">
@@ -21,7 +20,7 @@ export default function HajjPromo() {
         </div>
 
         {/* Description */}
-        <p className={`${roboto.className} text-gray-700 leading-relaxed text-justify`}>
+        <p className="text-gray-700 leading-relaxed text-justify">
           আল-ওয়াকিয়া হজ কাফেলা বিশ্বস্ততা ও সুনামের সাথে দীর্ঘদিন ধরে পবিত্র হজ ও ওমরাহ পালনে হাজীদের সেবা দিয়ে আসছে। অভিজ্ঞ আলেম ও মুয়াল্লিমের সরাসরি তত্ত্বাবধানে সুন্নাহ অনুযায়ী সঠিক নিয়মে হজ ও ওমরাহের সমস্ত হুকুম-আহকাম পালনে আমরা বদ্ধপরিকর। আমাদের দক্ষ টিম প্রতিটি পদক্ষেপেই হাজীদের সঠিক দিকনির্দেশনা ও সার্বিক সহায়তা প্রদান করে, যেন আপনার আত্মিক এই সফর হয় সহজ, সুন্দর ও সমর্পিত।
           <br /><br />
           হাজীদের সর্বোচ্চ আরাম ও মানসিক শান্তি নিশ্চিত করতে আল-ওয়াকিয়া হজ কাফেলা নিয়ে এসেছে আধুনিক ও মানসম্মত সেবা। মক্কা ও মদিনায় হারাম শরীফের কাছে আবাসন, আরামদায়ক পরিবহন, স্বাস্থ্যসম্মত খাবার এবং দ্রুত ভিসা ও এয়ার টিকিট বুকিং সেবাসহ আমরা অফার করছি আকর্ষণীয় হজ ও ওমরাহ প্যাকেজ। আপনার পছন্দ ও বাজেট অনুযায়ী সেরা প্যাকেজটি বেছে নিতে এবং নিশ্চিন্তে ইবাদতে মনোনিবেশ করতে আজই আল-ওয়াকিয়া হজ কাফেলার সাথে যোগাযোগ করুন।
