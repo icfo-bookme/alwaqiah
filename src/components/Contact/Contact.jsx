@@ -8,7 +8,7 @@ export const Contact = () => {
   return (
     <section className="bg-white min-h-screen py-10">
       <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-blue-950 mb-4">
+        <h1 className="text-xl md:text-3xl font-bold text-center text-blue-950 mb-4">
           যোগাযোগ করুন
         </h1>
         <p className="text-center px-6 text-gray-700 mb-10">

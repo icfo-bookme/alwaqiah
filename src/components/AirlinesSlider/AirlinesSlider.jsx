@@ -15,7 +15,7 @@ const AirlinesSlider = ({ airlines = [] }) => {
     <section className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="mb-10 text-center">
-          <h2 className="text-2xl font-bold text-[#313881] md:text-3xl">আমাদের ফ্লাইট পার্টনার</h2>
+          <h2 className="text-xl font-bold text-[#313881] md:text-3xl">আমাদের ফ্লাইট পার্টনার</h2>
           <p className="mt-2 text-sm text-gray-600 md:text-base">নিরাপদ ও আরামদায়ক যাত্রার জন্য আমরা নিয়ে এসেছি বিশ্বস্ত এয়ারলাইনসমূহ</p>
           <div className="mx-auto mt-3 h-1 w-24 rounded-full bg-gradient-to-r from-[#313881] to-[#0678B4]"></div>
         </div>

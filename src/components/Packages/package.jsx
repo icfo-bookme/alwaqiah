@@ -65,9 +65,9 @@ export default function Packages({ packages }) {
 
     return (
         <div className='bg-[#FFFFFF] pb-10'>
-            <div className="max-w-5xl mx-auto px-4 ">
+            <div className="max-w-5xl mx-auto md:px-4 ">
                 <div className={`  text-center mb-12`}>
-                    <h1 className="text-2xl  text-center text-blue-950  pt-8 lg:text-3xl font-bold mb-1">
+                    <h1 className="text-xl  text-center text-blue-950  pt-2 md:pt-5 lg:text-3xl font-bold mb-1">
                         আল-ওয়াকিয়া হজ কাফেলা-র  হজ ও ওমরাহ <span className="text-red-700">প্যাকেজসমূহ </span>
                     </h1>
                     {/* Umrah / Hajj Tabs */}
@@ -76,20 +76,20 @@ export default function Packages({ packages }) {
                             onClick={() => setActiveTab('umrah')}
                             className={`flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 ${activeTab === 'umrah'
                                 ? 'bg-gradient-to-r from-[#313881] to-[#0678B4] text-white shadow-lg scale-105'
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 border border-blue-300'
                                 }`}
                         >
-                            <FaKaaba />
+                            <FaKaaba className='hidden md:block' />
                             ওমরাহ প্যাকেজ
                         </button>
                         <button
                             onClick={() => setActiveTab('hajj')}
                             className={`flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-sm sm:text-base transition-all duration-200 ${activeTab === 'hajj'
                                 ? 'bg-gradient-to-r from-[#313881] to-[#0678B4] text-white shadow-lg scale-105'
-                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200 border border-blue-300'
                                 }`}
                         >
-                            <FaMosque />
+                            <FaMosque className='hidden md:block' />
                             হজ প্যাকেজ
                         </button>
                     </div>

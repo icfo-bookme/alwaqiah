@@ -27,7 +27,7 @@ export default function Schedules({ flights = [] }) {
         <div>
             {/* Header */}
             <div className="px-4 bg-gray-50 sm:px-6 py-8 border-b border-gray-200 text-center">
-                <h2 className="text-2xl sm:text-3xl font-bold text-blue-950">
+                <h2 className="text-xl md:text-3xl font-bold text-blue-950">
                     হজ ও ওমরাহ ফ্লাইট সময়সূচী
                 </h2>
                 <p className="text-sm sm:text-base font-semibold text-red-700 mt-1">“বিশেষ প্রয়োজনে সময়সূচী পরিবর্তন হতে পারে।’’</p>

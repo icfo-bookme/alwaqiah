@@ -35,14 +35,14 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
         <div className={`text-white mt-10 w-full max-w-4xl  space-y-3 md:space-y-12 text-left `}>
           {/* Ship Name */}
           {ship && (
-            <h2 className={`text-xl md:text-lg lg:text-4xl md:-mb-5 -mb-3 italic drop-shadow-md ${playfair.className}`}>
+            <h2 className={`text-lg md:text-lg lg:text-4xl md:-mb-5 -mb-3 italic drop-shadow-md ${playfair.className}`}>
               {ship}
             </h2>
           )}
 
           {/* Title */}
           {title && (
-            <h1 className={`lg:-mb-6 text-4xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
+            <h1 className={`lg:-mb-6 text-2xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
               {title}
             </h1>
           )}

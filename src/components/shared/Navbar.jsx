@@ -329,7 +329,7 @@ const BookMeHeader = () => {
 
                 {/* Desktop Contact Info */}
                 <div className="ml-3 hidden lg:flex items-center gap-4">
-                  <button type="button" onClick={openCustomForm} className="flex items-center gap-2 rounded-full px-4 py-2.5 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
+                  <button type="button" onClick={openCustomForm} className="flex items-center gap-2 rounded-full px-4 py-2.5 text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 bg-[#C70909]" >
                     <FaBoxOpen className="text-base" />
                     <span>কাস্টমাইজড প্যাকেজ</span>
                   </button>
@@ -343,7 +343,7 @@ const BookMeHeader = () => {
 
                 {/* Mobile Menu Button */}
                 <div className="lg:hidden flex items-center gap-3 w-40">
-                  <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
+                  <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold bg-[#C70909]" >
                     {/* <FaBoxOpen /> */}
                     <span>কাস্টমাইজড প্যাকেজ</span>
                   </button>
