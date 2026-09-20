@@ -342,9 +342,9 @@ const BookMeHeader = () => {
               </div>
 
               {/* Mobile Menu Button */}
-              <div className="lg:hidden flex items-center gap-3">
+              <div className="lg:hidden flex items-center gap-3 w-40">
                 <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold" style={{ background: "linear-gradient(90deg, #313881, #0678B4)" }}>
-                  <FaBoxOpen />
+                  {/* <FaBoxOpen /> */}
                   <span>কাস্টমাইজড প্যাকেজ</span>
                 </button>
                 <button onClick={toggleMobileMenu} className="text-[#f9f9fc] focus:outline-none" aria-label="Toggle menu">

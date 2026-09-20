@@ -4,12 +4,14 @@ import HajjPromo from "@/components/HajjPromo/HajjPromo";
 import FAQSection from "@/components/FAQSection/FAQSection";
 import ImageCarousel from "@/components/ImageCarousel/ImageCarousel";
 import Packages from "@/components/Packages/package";
+import AirlinesSlider from "@/components/AirlinesSlider/AirlinesSlider";
 import Schedules from "@/components/Schedules/schedules";
 import YouTubeSlider from "@/components/YouTubeSlider/YouTubeSlider";
 import Banner from "@/components/ui/Banner";
 import getPackages from "@/lib/getPackages";
 import getSliders from "@/lib/getSliders";
 import getFlights from "@/lib/getFlights";
+import getAirlines from "@/lib/getAirlines";
 import getFaqs from "@/lib/getFaqs";
 import getYoutubeVideos from "@/lib/getYoutubeVideos";
 
@@ -17,6 +19,7 @@ export default async function Home() {
 
   const packages = await getPackages();
   const flights = await getFlights();
+  const airlines = await getAirlines();
   const sliders = await getSliders();
   const youtubeVideos = await getYoutubeVideos();
   const faqs = await getFaqs();
@@ -31,6 +34,7 @@ export default async function Home() {
         />
         <YouTubeSlider videos={youtubeVideos} />
         <Packages packages={packages} />
+        <AirlinesSlider airlines={airlines} />
         <Schedules flights={flights} />
         <HajjPromo />
         <ImageCarousel sliders={sliders} />      
