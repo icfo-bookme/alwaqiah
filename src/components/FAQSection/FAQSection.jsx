@@ -14,10 +14,10 @@ const FAQSection = ({ faqs = [], emptyMessage }) => {
         <p className="p-2 text-sm font-medium tracking-wider text-center text-red-600 uppercase">
           সাধারণ জিজ্ঞাসা
         </p>
-        <h2 className="mb-12 text-xl font-bold leading-none text-center text-blue-950 sm:text-3xl">
+        <h2 className="mb-2 text-xl font-bold leading-none text-center text-blue-950 sm:text-3xl">
           আল-ওয়াকিয়া হজ কাফেলা &ndash; প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী (FAQ)
         </h2>
-<div className="mt-3 w-24 h-1 rounded-full mx-auto bg-gradient-to-r from-[#313881] to-[#0678B4]"></div>
+<div className="mb-10 mt-3 w-24 h-1 rounded-full mx-auto bg-gradient-to-r from-[#313881] to-[#0678B4]"></div>
         <div className="flex flex-col gap-3 sm:px-8 lg:px-12 xl:px-32">
           {sortedFaqs.length === 0 && (
             <p className="py-8 text-center text-gray-500">{emptyMessage}</p>
