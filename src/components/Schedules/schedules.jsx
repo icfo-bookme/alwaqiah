@@ -27,7 +27,7 @@ export default function Schedules({ flights = [] }) {
         <div>
             {/* Header */}
             <div className="px-4 bg-gray-50 sm:px-6 py-8 border-b border-gray-200 text-center">
-                <h2 className="text-xl md:text-3xl font-bold text-blue-950">
+                <h2 className="text-2xl md:text-3xl font-bold text-blue-950">
                     হজ ও ওমরাহ ফ্লাইট সময়সূচী
                 </h2>
                 <p className="text-sm sm:text-base font-semibold text-red-700 mt-1">“বিশেষ প্রয়োজনে সময়সূচী পরিবর্তন হতে পারে।’’</p>
@@ -36,7 +36,7 @@ export default function Schedules({ flights = [] }) {
             {/* Flights Section */}
             {sortedFlights.length > 0 ? (
             <div className={`bg-gray-100 ${roboto.className} rounded-lg shadow-md max-w-5xl mx-auto my-6 w-full`}>
-                <div className="p-4 sm:p-6 w-full overflow-x-auto">
+                <div className="p-4 sm:p-6 w-full ">
                     <table className="w-full table-auto divide-y divide-gray-200 min-w-[760px]">
                         <thead>
                             <tr>
