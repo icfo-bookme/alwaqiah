@@ -13,7 +13,7 @@ export default async function Page() {
   const faqs = await getFaqs();
 
   return (
-    <div className="bg-gray-50 pb-10">
+    <div className="bg-gray-50 ">
       <Banner
         imageUrl="/7.jpg"
         title="প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী"
@@ -23,7 +23,9 @@ export default async function Page() {
         faqs={faqs}
         emptyMessage="এখনো কোনো প্রশ্ন ও উত্তর যোগ করা হয়নি।"
       />
-      <CTAButtons />
+      <div className="pb-10">
+        <CTAButtons />
+      </div>
     </div>
   );
 }
