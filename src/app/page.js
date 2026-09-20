@@ -14,6 +14,33 @@ import getFlights from "@/lib/getFlights";
 import getAirlines from "@/lib/getAirlines";
 import getFaqs from "@/lib/getFaqs";
 import getYoutubeVideos from "@/lib/getYoutubeVideos";
+import { buildGraph, webPageNode, breadcrumbNode, SITE_URL } from "@/lib/schema";
+
+// JSON-LD: WebSite + WebPage + Breadcrumb + FAQPage (homepage)
+function getHomeJsonLd(faqs) {
+  return buildGraph([
+    webPageNode({
+      path: "/",
+      title: "আল-ওয়াকিয়া হজ কাফেলা — বিশ্বস্ত হজ ও ওমরাহ এজেন্সি",
+      description: "আল-ওয়াকিয়া হজ কাফেলার সাথে নিশ্চিন্তে হজ ও ওমরাহ পালন করুন। অভিজ্ঞ আলেম ও মুয়াল্লিমের তত্ত্বাবধানে মানসম্মত হজ-ওমরাহ প্যাকেজ, ভিসা, এয়ার টিকিট ও আবাসন সেবা।",
+    }),
+    breadcrumbNode([{ name: "হোম", path: "" }]),
+    {
+      "@type": "FAQPage",
+      mainEntity: faqs.slice(0, 15).map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
+      })),
+    },
+    {
+      "@type": "OfferCatalog",
+      name: "হজ ও ওমরাহ প্যাকেজসমূহ",
+      url: `${SITE_URL}/packages`,
+      provider: { "@id": `${SITE_URL}/#travelagency` },
+    },
+  ]);
+}
 
 export default async function Home() {
 
@@ -23,8 +50,14 @@ export default async function Home() {
   const sliders = await getSliders();
   const youtubeVideos = await getYoutubeVideos();
   const faqs = await getFaqs();
+  const homeJsonLd = getHomeJsonLd(faqs);
   return (
     <main className="bg-gray-50">
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
       <div>
         <Banner
           imageUrl="/jeddah.jpg"        

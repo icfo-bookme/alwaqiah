@@ -1,5 +1,5 @@
-// আল-ওয়াকিয়া হজ কাফেলা — ব্লগ ডেটা
-// প্রতিটি ব্লগের বিস্তারিত SEO-ফ্রেন্ডলি কনটেন্ট এখানে সংরক্ষিত।
+// Al Waqiah Hajj Kafela — blog data
+// Each entry below stores SEO-friendly content for a single blog post.
 
 const blogPosts = [
   {

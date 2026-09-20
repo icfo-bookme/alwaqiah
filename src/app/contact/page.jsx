@@ -2,17 +2,51 @@ import ContactForm from "@/components/ContactForm/ContactForm";
 import Banner from "@/components/ui/Banner";
 import Link from "next/link";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaKaaba } from "react-icons/fa";
+import { buildGraph, webPageNode, breadcrumbNode, travelAgencyNode, ORG_PHONE, ORG_EMAIL } from "@/lib/schema";
 
 export const metadata = {
   title: "যোগাযোগ | আল-ওয়াকিয়া হজ কাফেলা",
   description: "আল-ওয়াকিয়া হজ কাফেলার সাথে যোগাযোগ করুন — হজ ও ওমরাহ প্যাকেজ সংক্রান্ত প্রশ্ন, বুকিং ও যেকোনো সহায়তায় আমাদের অফিস, ফোন ও ইমেইলে যুক্ত হোন।",
 };
 
+// JSON-LD: ContactPage — reuses the shared TravelAgency node with contactPoint
+const contactJsonLd = buildGraph([
+  webPageNode({
+    path: "/contact",
+    title: "যোগাযোগ | আল-ওয়াকিয়া হজ কাফেলা",
+    description: "আল-ওয়াকিয়া হজ কাফেলার সাথে যোগাযোগ করুন — প্রশ্ন, বুকিং ও যেকোনো সহায়তায় আমাদের অফিস, ফোন ও ইমেইলে যুক্ত হোন।",
+  }),
+  { "@type": "ContactPage" },
+  {
+    "@type": "TravelAgency",
+    "@id": `${travelAgencyNode["@id"]}#contact`,
+    name: "আল-ওয়াকিয়া হজ কাফেলা",
+    telephone: ORG_PHONE,
+    email: ORG_EMAIL,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: ORG_PHONE,
+      email: ORG_EMAIL,
+      contactType: "customer service",
+      areaServed: "BD",
+      availableLanguage: ["Bengali", "Arabic", "English"],
+    },
+  },
+  breadcrumbNode([
+    { name: "হোম", path: "" },
+    { name: "যোগাযোগ", path: "/contact" },
+  ]),
+]);
+
 export default function ContactUs() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+      />
       <Banner
-        imageUrl="/7.jpg"
+        imageUrl="/hero.png"
         title="যোগাযোগ"
         subtitle=""
         heightClass=" h-[50vh] lg:h-[70vh]"

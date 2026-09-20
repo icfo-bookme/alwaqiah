@@ -12,7 +12,8 @@ const playfair = Playfair_Display({
 });
 
 const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
-  const defaultImage = "/p.jpeg";
+  // High-res fallback so large screens never stretch a tiny image
+  const defaultImage = "/hero.png";
 
   return (
     <div className={`relative w-full ${heightClass || 'h-[60vh]'} overflow-hidden shadow-2xl`}>
@@ -21,6 +22,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
         src={imageUrl || defaultImage}
         alt={title || "Banner Image"}
         fill
+        sizes="100vw"
         className="object-cover"
         priority
       />
@@ -31,7 +33,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
 
       {/* Content */}
       <div className="absolute inset-0 mt-12 md:mt-16 flex items-center lg:items-center pb-6 lg:pb-0 px-4 md:px-8 z-20">
-        <div className={`text-white mt-10 w-full max-w-4xl  space-y-3 md:space-y-12 text-left `}>
+        <div className={`text-white mt-10 w-full max-w-4xl  space-y-3 md:space-y-3 text-left `}>
           {/* Ship Name */}
           {ship && (
             <h2 className={`text-lg md:text-lg lg:text-4xl md:-mb-5 -mb-3 italic drop-shadow-md ${playfair.className}`}>
@@ -41,7 +43,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
 
           {/* Title */}
           {title && (
-            <h1 className={`lg:-mb-6 text-4xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
+            <h1 className={` text-4xl md:text-3xl lg:text-5xl italic leading-tight drop-shadow-lg ${playfair.className}`}>
               {title}
             </h1>
           )}

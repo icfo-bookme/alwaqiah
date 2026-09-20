@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Banner from "@/components/ui/Banner";
 import blogPosts from "@/data/blogPosts";
+import { buildGraph, webPageNode, breadcrumbNode, SITE_URL } from "@/lib/schema";
 import { notFound } from "next/navigation";
 import {
   FaCalendarAlt,
@@ -18,7 +19,6 @@ import {
   FaQuestionCircle,
 } from "react-icons/fa";
 
-const SITE_URL = "https://alwaqiah.com";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -62,14 +62,14 @@ export async function generateStaticParams() {
   return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-//  JSON-LD Structured Data 
+//  JSON-LD Structured Data (shared @graph — Organization/WebSite/TravelAgency via @id)
 function getStructuredData(post) {
   const url = `${SITE_URL}/blog/${post.slug}`;
   const dateISO = new Date(post.dateISO).toISOString();
 
   const blogJsonLd = {
-    "@context": "https://schema.org",
     "@type": "BlogPosting",
+    "@id": url,
     headline: post.metaTitle,
     description: post.metaDescription,
     image: `${SITE_URL}${post.image}`,
@@ -77,19 +77,13 @@ function getStructuredData(post) {
     dateModified: dateISO,
     inLanguage: "bn-BD",
     author: { "@type": "Organization", name: post.author, url: SITE_URL },
-    publisher: {
-      "@type": "Organization",
-      name: "আল-ওয়াকিয়া হজ কাফেলা",
-      url: SITE_URL,
-      logo: { "@type": "ImageObject", url: `${SITE_URL}/alwaqiah-logo.png` },
-    },
+    publisher: { "@id": `${SITE_URL}/#organization` },
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
     keywords: post.keywords.join(", "),
     articleSection: "হজ ও ওমরাহ গাইড",
   };
 
   const faqJsonLd = {
-    "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: post.faqs.map((faq) => ({
       "@type": "Question",
@@ -98,17 +92,13 @@ function getStructuredData(post) {
     })),
   };
 
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "হোম", item: SITE_URL },
-      { "@type": "ListItem", position: 2, name: "ব্লগ", item: `${SITE_URL}#blogs` },
-      { "@type": "ListItem", position: 3, name: post.title, item: url },
-    ],
-  };
+  const breadcrumbJsonLd = breadcrumbNode([
+    { name: "হোম", path: "" },
+    { name: "ব্লগ", path: "/" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
 
-  return [blogJsonLd, faqJsonLd, breadcrumbJsonLd];
+  return buildGraph([webPageNode({ path: `/blog/${post.slug}`, title: post.metaTitle, description: post.metaDescription }), blogJsonLd, faqJsonLd, breadcrumbJsonLd]);
 }
 
 export default async function BlogDetailPage({ params }) {
@@ -118,20 +108,17 @@ export default async function BlogDetailPage({ params }) {
   if (!post) return notFound();
 
   const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
-  const jsonLdList = getStructuredData(post);
+  const jsonLd = getStructuredData(post);
 
   return (
     <>
-      {/* JSON-LD: BlogPosting + FAQPage + BreadcrumbList */}
-      {jsonLdList.map((jsonLd, i) => (
-        <script
-          key={i}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      ))}
+      {/* JSON-LD: WebPage + BlogPosting + FAQPage + Breadcrumb (shared @graph) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-      {/* হিরো ব্যানার */}
+      {/* Hero banner */}
       <Banner
         imageUrl={post.image}
         title={post.title}

@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://alwaqiah.com"), // TODO: প্রোডাকশনে সঠিক ডোমেইন দিয়ে আপডেট করুন
+  metadataBase: new URL("https://alwaqiah.com"), // TODO: Update with the correct production domain before go-live
   title: "আল-ওয়াকিয়া হজ কাফেলা — বিশ্বস্ত হজ ও ওমরাহ এজেন্সি",
   description: "আল-ওয়াকিয়া হজ কাফেলার সাথে নিশ্চিন্তে হজ ও ওমরাহ পালন করুন। অভিজ্ঞ আলেম ও মুয়াল্লিমের তত্ত্বাবধানে মানসম্মত হজ-ওমরাহ প্যাকেজ, ভিসা, এয়ার টিকিট ও আবাসন সেবা।",
   keywords: [
