@@ -21,7 +21,7 @@ function truncate(text, limit) {
 const BlogSection = () => {
   return (
     <section id="blogs" className="py-12 bg-gray-50">
-      <h2 className="text-xl md:text-4xl font-bold text-center text-[#00026E] mb-2">ব্লগ</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-center text-[#00026E] mb-2">ব্লগ</h2>
       <p className="text-center text-red-700 font-semibold mb-10">হজ-ওমরাহ সংক্রান্ত জরুরি তথ্য ও গাইড</p>
       <div className="container mx-auto px-4">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
