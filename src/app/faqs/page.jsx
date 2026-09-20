@@ -13,7 +13,7 @@ export default async function Page() {
   const faqs = await getFaqs();
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 pb-10">
       <Banner
         imageUrl="/7.jpg"
         title="প্রায়শই জিজ্ঞাসিত প্রশ্নাবলী"
