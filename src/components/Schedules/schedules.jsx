@@ -37,7 +37,7 @@ export default function Schedules({ flights = [] }) {
             {sortedFlights.length > 0 ? (
             <div className={`bg-gray-100 ${roboto.className} rounded-lg shadow-md max-w-5xl mx-auto my-6 w-full`}>
                 <div className="p-4 sm:p-6 w-full ">
-                    <table className="w-full table-auto divide-y divide-gray-200 min-w-[760px]">
+                    <table className="w-full table-auto divide-y divide-gray-200 min-w-full">
                         <thead>
                             <tr>
                                 {TABLE_HEADINGS.map((heading) => (
