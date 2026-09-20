@@ -40,7 +40,7 @@ const YouTubeSlider = ({ videos = [] }) => {
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <div className="text-center mb-10">
-          <h2 className="text-xl md:text-3xl font-bold text-[#313881]">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#313881]">
             ভিডিও গ্যালারি
           </h2>
           <p className="mt-2 text-gray-600 text-sm md:text-base">

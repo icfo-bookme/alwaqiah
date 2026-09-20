@@ -67,7 +67,7 @@ export default function Packages({ packages }) {
         <div className='bg-[#FFFFFF] pb-10'>
             <div className="max-w-5xl mx-auto md:px-4 ">
                 <div className={`  text-center mb-12`}>
-                    <h1 className="text-xl  text-center text-blue-950  pt-2 md:pt-5 lg:text-3xl font-bold mb-1">
+                    <h1 className="text-2xl  text-center text-blue-950  pt-2 md:pt-5 lg:text-3xl font-bold mb-1">
                         আল-ওয়াকিয়া হজ কাফেলা-র  হজ ও ওমরাহ <span className="text-red-700">প্যাকেজসমূহ </span>
                     </h1>
                     <div className="mt-3 w-24 h-1 rounded-full mx-auto bg-gradient-to-r from-[#313881] to-[#0678B4]"></div>
