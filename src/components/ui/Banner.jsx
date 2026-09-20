@@ -28,12 +28,12 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
       />
 
       {/* Gradient Overlays */}
-      <div className="absolute inset-0 bg-gray-950 opacity-60 z-0"></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-blue-500/20 to-transparent z-10"></div>
+      <div className="absolute inset-0 bg-gray-950 opacity-50 z-0"></div>
+      {/* <div className="absolute inset-0 bg-gradient-to-t from-blue-900/0 via-blue-500/20 to-transparent z-10"></div> */}
 
       {/* Content */}
       <div className="absolute inset-0 mt-12 md:mt-16 flex items-center lg:items-center pb-6 lg:pb-0 px-4 md:px-8 z-20">
-        <div className={`text-white mt-10 w-full max-w-4xl  space-y-3 md:space-y-3 text-left `}>
+        <div className={`text-white mt-10 w-full max-w-3xl  space-y-3 md:space-y-3 text-left `}>
           {/* Ship Name */}
           {ship && (
             <h2 className="text-lg md:text-lg lg:text-4xl md:-mb-5 -mb-3 italic drop-shadow-md font-display">
