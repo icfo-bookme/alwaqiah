@@ -59,6 +59,11 @@ const CustomPackageForm = ({ onClose, airlines = [], airlinesLoading = false }) 
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose]);
 
+  // Scroll modal body back to top when the success view replaces the form
+  useEffect(() => {
+    if (successInfo) bodyRef.current?.scrollTo({ top: 0 });
+  }, [successInfo]);
+
   const toInt = (value, fallback) => {
     const parsed = parseInt(value, 10);
     return Number.isNaN(parsed) ? fallback : parsed;
@@ -96,7 +101,6 @@ const CustomPackageForm = ({ onClose, airlines = [], airlinesLoading = false }) 
       if (res.ok && json?.status === "success") {
         setSuccessInfo({ message: json.message || SUCCESS_FALLBACK, id: json?.custom_package_request?.id ?? null });
         reset(DEFAULT_VALUES);
-        bodyRef.current?.scrollTo({ top: 0 });
         return;
       }
 

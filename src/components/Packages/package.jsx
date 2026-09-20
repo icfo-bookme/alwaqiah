@@ -10,7 +10,6 @@ import {
     FaUserGroup
 } from 'react-icons/fa6';
 import { Roboto } from 'next/font/google';
-import Link from 'next/link';
 import CTAButtons from '../ui/CTAButtons';
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '700'] });

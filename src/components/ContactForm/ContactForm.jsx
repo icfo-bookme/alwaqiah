@@ -103,8 +103,7 @@ const ContactForm = ({ title }) => {
 
             // HTTP 500 / unexpected — never render json.message (may leak internals)
             toast.error(GENERIC_ERROR_BN);
-        } catch (error) {
-            console.error("Contact inquiry failed:", error);
+        } catch {
             toast.error(GENERIC_ERROR_BN);
         }
     };

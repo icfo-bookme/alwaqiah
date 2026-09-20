@@ -3,8 +3,7 @@ const getFlights = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL_V1}/api/flights`);
     const data = await res.json();
     return data?.flights || [];
-  } catch (error) {
-    console.error('Error fetching flights:', error);
+  } catch {
     return [];
   }
 };

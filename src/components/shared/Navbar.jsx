@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,7 +12,6 @@ import {
   FaTimes,
   FaBoxOpen,
   FaChevronRight,
-  FaChevronDown
 } from "react-icons/fa";
 import CustomPackageForm from "@/components/CustomPackageForm/CustomPackageForm";
 
@@ -48,11 +47,7 @@ const BookMeHeader = () => {
     }
   }, []);
 
-  // Load airlines on page load
-  useEffect(() => {
-    loadAirlines();
-  }, [loadAirlines]);
-
+  // Airlines are fetched lazily on first modal open; openCustomForm retries when empty
   const openCustomForm = () => {
     setIsCustomFormOpen(true);
     if (airlines.length === 0 && !airlinesLoadingRef.current) loadAirlines(); // retry if page-load fetch failed
@@ -73,9 +68,8 @@ const BookMeHeader = () => {
     return pathname.startsWith(href);
   };
 
-  // Mobile menu component
-  const MobileMenu = () => {
-    return (
+  // Mobile menu markup (stateless — rendered inline instead of a nested component)
+  const renderMobileMenu = () => (
       <div className={`${roboto.className} h-full flex flex-col overflow-hidden border`}>
         {/* Menu Header */}
         <div className="flex justify-between p-4 border-b bg-gray-700 border-gray-200 shadow-xl">
@@ -139,7 +133,7 @@ const BookMeHeader = () => {
                 prefetch
               >
                 <span className="font-medium">তথ্য</span>
-                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/packages") ? "text-blue-600" : "text-blue-400"
+                <FaChevronRight className={`group-hover:translate-x-1 transition-transform ${isActiveLink("/info") ? "text-blue-600" : "text-blue-400"
                   }`} />
               </Link>
             </li>
@@ -228,7 +222,6 @@ const BookMeHeader = () => {
         </div>
       </div>
     );
-  };
 
   return (
     <>
@@ -344,7 +337,6 @@ const BookMeHeader = () => {
                 {/* Mobile Menu Button */}
                 <div className="lg:hidden flex items-center gap-3 w-40">
                   <button type="button" onClick={openCustomForm} className="flex items-center gap-1.5 rounded-full px-3 py-2 text-white text-xs font-semibold bg-[#C70909]" >
-                    {/* <FaBoxOpen /> */}
                     <span>কাস্টমাইজড প্যাকেজ</span>
                   </button>
                   <button onClick={toggleMobileMenu} className="text-[#f9f9fc] focus:outline-none" aria-label="Toggle menu">
@@ -369,7 +361,7 @@ const BookMeHeader = () => {
                 ref={mobileMenuRef}
                 className="absolute top-0 right-0 h-full w-4/5 max-w-xs bg-white shadow-xl transform transition-transform duration-300 ease-in-out"
               >
-                <MobileMenu />
+                {renderMobileMenu()}
               </div>
             </div>
           )}

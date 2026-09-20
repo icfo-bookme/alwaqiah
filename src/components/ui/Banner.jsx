@@ -3,7 +3,6 @@
 import React from 'react';
 import Image from 'next/image';
 import { Playfair_Display } from 'next/font/google';
-import { IoLogoWhatsapp } from "react-icons/io";
 // Import the Playfair font
 const playfair = Playfair_Display({
   subsets: ['latin'],

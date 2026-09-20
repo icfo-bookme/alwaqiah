@@ -1,6 +1,5 @@
 import ContactForm from "@/components/ContactForm/ContactForm";
 import Banner from "@/components/ui/Banner";
-import Image from "next/image";
 import Link from "next/link";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaFacebookF, FaKaaba } from "react-icons/fa";
 
