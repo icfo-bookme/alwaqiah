@@ -60,7 +60,7 @@ const Banner = ({ imageUrl, ship, title, subtitle, heightClass }) => {
             {/* Call Now button */}
             <button
               onClick={() => window.location.href = 'tel:+880123456789'}
-              className="flex items-center justify-center font-bold  text-white border-2 border-white px-2 py-1 lg:px-4 lg:py-2 rounded-3xl shadow-lg hover:bg-black/20 transition-all duration-300 text-[11px] md:text-sm"
+              className="flex items-center justify-center font-bold  text-white border-2 border-white px-2 py-1 lg:px-4 lg:py-2 rounded-3xl shadow-lg hover:bg-black/20 transition-all duration-300 text-[13px] md:text-sm"
             >
 
               কল করুন →
